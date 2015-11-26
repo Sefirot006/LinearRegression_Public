@@ -31,10 +31,6 @@ printGameStatus(const CGame& g) {
     return fd.isOnFire();
 }
 
-bool cmp(pair<CFireDoor::TVecDoubles,bool> p1,pair<CFireDoor::TVecDoubles,bool> p2){
-	return p1.first[0]<p2.first[0];
-}
-
 void printList(list<pair<CFireDoor::TVecDoubles,bool> >& lista){
 	for(pair<CFireDoor::TVecDoubles,bool> p:lista){
 		for(unsigned i=0;i<p.first.size();++i)
@@ -68,7 +64,6 @@ learnFunc(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista) {
 	last=g->getCurrentFireDoor().getNextStepInputs();
 	lista.push_back(make_pair(last,true));
 
-	lista.sort(cmp);
 
 	/*
 	while(passDoor(g,lista,last)){
@@ -86,7 +81,7 @@ main(int argc,char** argv) {
 	int level=0;
 	if(argc<2 || argc >3){
 		cerr << "Incorrect number of arguments (2)" << endl
-			<< "./main <num_examples_learning>" << endl;
+			<< "./main <num_examples_learning> [level=0]" << endl;
 		return 0;
 	}else if(argc==3)
 		level=stoi(argv[2]);
