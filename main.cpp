@@ -9,6 +9,7 @@
 using namespace FireDoorEscaper;
 using namespace std;
 
+int alpha;
 int num_learn;
 
 // Print Game Status Values
@@ -66,18 +67,28 @@ learnFunc(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista) {
 
 bool
 getDecision(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista) {
+	//mientras no hay convergencia {
+	//	THETA 0
+	//	for (elementos lista) {
+	//		h_0(x_i) -> elem_i.fire
+	//}
+	//	for (elementos lista) {}
+	//	actualizar thetas.
+	//}
 
 }
 
 int
 main(int argc,char** argv) {
 	int level=0;
-	if(argc<2 || argc >3){
+	if(argc<3 || argc >4){
 		cerr << "Incorrect number of arguments (2)" << endl
-			<< "./main <num_examples_learning> [level=0]" << endl;
+			<< "./main <num_examples_learning> <alpha>[level=0]" << endl;
 		return 0;
-	}else if(argc==3)
-		level=stoi(argv[2]);
+	}else if(argc==4){
+		level=stoi(argv[3]);
+	}
+		alpha=stoi(argv[2]);
 	num_learn=stoi(argv[1]);
 
 	list<pair<CFireDoor::TVecDoubles,bool> > lista;
