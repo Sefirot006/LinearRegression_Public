@@ -1,0 +1,2 @@
+/usr/bin/ar cq /home/jaume/Dropbox/4t/RA/firedoorescaper/lib/libFireDoorEscaper.a  CMakeFiles/FireDoorEscaper.dir/cfiredoor.o CMakeFiles/FireDoorEscaper.dir/crandomgenerator.o CMakeFiles/FireDoorEscaper.dir/cgame.o
+/usr/bin/ranlib /home/jaume/Dropbox/4t/RA/firedoorescaper/lib/libFireDoorEscaper.a

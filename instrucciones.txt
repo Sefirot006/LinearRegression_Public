@@ -1,0 +1,5 @@
+crear carpeta build/
+ir a la carpeta build y ejecutar cmake ../src
+despues ejecutar make en build
+volver al direcorio anterior
+allí ya ejecutar make para compilar
