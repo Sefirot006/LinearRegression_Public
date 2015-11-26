@@ -58,8 +58,15 @@ learnFunc(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista) {
 			insert(g,lista);
 			g->nextStep();
 		}
+		//lista.back().second=fd.isOnFire();
+		lista.back().second=g->getCurrentFireDoor().isOnFire();
 	}
 	printList(lista);
+}
+
+bool
+getDecision(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista) {
+
 }
 
 int
@@ -81,14 +88,17 @@ main(int argc,char** argv) {
 
 	// Main loop: stay will the game is on (i.e. the player is alive)
 	while (game->getGameStatus() == CGame::GS_PLAYING) {
-		// Do some game steps and print values
-
-		/*for (unsigned i=0; i < 20; i++) {
-		    //printGameStatus(*game);
-		    game->nextStep();
-		}*/
+		// Do some game steps and print values /*for (unsigned i=0; i < 20; i++) {//printGameStatus(*game); game->nextStep();}*/
 		lista.clear();
+		// Get some data of the doors to learn.
 		learnFunc(game,lista);
+
+		// Get decision.
+		while (getDecision(game,lista)) { 
+			//**** AVOIDING TO CROSS THE DOOR ****
+            std::cout << "**** AVOIDING TO CROSS THE DOOR ****\n";
+            game->nextStep();
+		}
 
 		// Try to cross the current FireDoor
 		printGameStatus(*game);

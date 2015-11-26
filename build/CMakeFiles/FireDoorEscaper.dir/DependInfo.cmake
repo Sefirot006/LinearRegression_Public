@@ -1,20 +1,23 @@
 # The set of languages for which implicit dependencies are needed:
-set(CMAKE_DEPENDS_LANGUAGES
+SET(CMAKE_DEPENDS_LANGUAGES
   "CXX"
   )
 # The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/jaume/Dropbox/4t/RA/firedoorescaper/src/cfiredoor.cpp" "/home/jaume/Dropbox/4t/RA/firedoorescaper/build/CMakeFiles/FireDoorEscaper.dir/cfiredoor.o"
-  "/home/jaume/Dropbox/4t/RA/firedoorescaper/src/cgame.cpp" "/home/jaume/Dropbox/4t/RA/firedoorescaper/build/CMakeFiles/FireDoorEscaper.dir/cgame.o"
-  "/home/jaume/Dropbox/4t/RA/firedoorescaper/src/crandomgenerator.cpp" "/home/jaume/Dropbox/4t/RA/firedoorescaper/build/CMakeFiles/FireDoorEscaper.dir/crandomgenerator.o"
+SET(CMAKE_DEPENDS_CHECK_CXX
+  "/home/kirtash/Documentos/RA/FireDoor/src/cfiredoor.cpp" "/home/kirtash/Documentos/RA/FireDoor/build/CMakeFiles/FireDoorEscaper.dir/cfiredoor.o"
+  "/home/kirtash/Documentos/RA/FireDoor/src/cgame.cpp" "/home/kirtash/Documentos/RA/FireDoor/build/CMakeFiles/FireDoorEscaper.dir/cgame.o"
+  "/home/kirtash/Documentos/RA/FireDoor/src/crandomgenerator.cpp" "/home/kirtash/Documentos/RA/FireDoor/build/CMakeFiles/FireDoorEscaper.dir/crandomgenerator.o"
   )
-set(CMAKE_CXX_COMPILER_ID "GNU")
-
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/jaume/Dropbox/4t/RA/firedoorescaper/src/../include"
-  )
+SET(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Targets to which this target links.
-set(CMAKE_TARGET_LINKED_INFO_FILES
+SET(CMAKE_TARGET_LINKED_INFO_FILES
   )
+
+# The include file search paths:
+SET(CMAKE_C_TARGET_INCLUDE_PATH
+  "/home/kirtash/Documentos/RA/FireDoor/src/../include"
+  )
+SET(CMAKE_CXX_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
+SET(CMAKE_Fortran_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})
+SET(CMAKE_ASM_TARGET_INCLUDE_PATH ${CMAKE_C_TARGET_INCLUDE_PATH})

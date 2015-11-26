@@ -6,19 +6,19 @@
 
 #IncludeRegexTransform: 
 
-/home/jaume/Dropbox/4t/RA/firedoorescaper/src/../include/cfiredoor.h
+/home/kirtash/Documentos/RA/FireDoor/src/../include/cfiredoor.h
 vector
 -
 boost/noncopyable.hpp
 -
 
-/home/jaume/Dropbox/4t/RA/firedoorescaper/src/../include/cgame.h
+/home/kirtash/Documentos/RA/FireDoor/src/../include/cgame.h
 vector
 -
 boost/noncopyable.hpp
 -
 
-/home/jaume/Dropbox/4t/RA/firedoorescaper/src/../include/crandomgenerator.h
+/home/kirtash/Documentos/RA/FireDoor/src/../include/crandomgenerator.h
 vector
 -
 boost/noncopyable.hpp
@@ -30,7 +30,7 @@ boost/random/uniform_int_distribution.hpp
 boost/random/uniform_real_distribution.hpp
 -
 
-/home/jaume/Dropbox/4t/RA/firedoorescaper/src/cfiredoor.cpp
+/home/kirtash/Documentos/RA/FireDoor/src/cfiredoor.cpp
 cmath
 -
 cfiredoor.h
@@ -38,9 +38,9 @@ cfiredoor.h
 crandomgenerator.h
 -
 
-/home/jaume/Dropbox/4t/RA/firedoorescaper/src/cgame.cpp
+/home/kirtash/Documentos/RA/FireDoor/src/cgame.cpp
 cgame.h
-/home/jaume/Dropbox/4t/RA/firedoorescaper/src/cgame.h
+/home/kirtash/Documentos/RA/FireDoor/src/cgame.h
 cfiredoor.h
 -
 crandomgenerator.h
@@ -48,7 +48,7 @@ crandomgenerator.h
 cmath
 -
 
-/home/jaume/Dropbox/4t/RA/firedoorescaper/src/crandomgenerator.cpp
+/home/kirtash/Documentos/RA/FireDoor/src/crandomgenerator.cpp
 crandomgenerator.h
-/home/jaume/Dropbox/4t/RA/firedoorescaper/src/crandomgenerator.h
+/home/kirtash/Documentos/RA/FireDoor/src/crandomgenerator.h
 

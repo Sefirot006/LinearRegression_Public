@@ -30,4 +30,4 @@ main
 *.app
 
 # Build
-build/*
+./build/*
