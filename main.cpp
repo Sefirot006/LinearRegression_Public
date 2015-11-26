@@ -64,15 +64,6 @@ learnFunc(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista) {
 	last=g->getCurrentFireDoor().getNextStepInputs();
 	lista.push_back(make_pair(last,true));
 
-
-	/*
-	while(passDoor(g,lista,last)){
-		g->nextStep();
-		last=g->getCurrentFireDoor().getNextStepInputs()[0];
-		lista.push_back(make_pair(last,true));
-		lista.sort(comp);
-	}*/
-
 	printList(lista);
 }
 
