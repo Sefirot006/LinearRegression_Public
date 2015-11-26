@@ -73,29 +73,29 @@ getDecision(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista) {
 	double temp_0, temp_1;
 	double aux_0,  aux_1;
 	double intParentSum;
-	
+
 	mientras no hay convergencia { (aux_0 != 0)	//No necesitamos aux_N
 		for (elementos lista) {
 			THETA 0
 
 			h_0(x_i) -> elem_i.fire
-			temp_0 = 
+			temp_0 =
 
 			THETA 1
 			h_0(x_i) -> elem_i.fire
 			*x
-			temp_1 = 
+			temp_1 =
 		}
-		
+
 		realizar cálculos de fuera de sumatorio
 
 
 
 		actualizar thetas.
-			theta_0 = temp_0; 
-			theta_1 = temp_1; 
+			theta_0 = temp_0;
+			theta_1 = temp_1;
 	}
-	
+
 }
 */
 
@@ -104,35 +104,22 @@ getDecision(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista) {
 	double theta_0 = 0;
 	double theta_1 = 0;
 	double temp_0, temp_1;
-	double aux_0,  aux_1;
-	double intParentSum;
-	
+
 	//mientras no hay convergencia.
-	while (aux_0 != 0){ //No necesitamos aux_N
+	while (temp_0 != 0){ //No necesitamos aux_N
+		temp_0=temp_1=0;
 		//for (elementos lista) {
-		for (int i=0; i<num_learn; ++i){
-			intParentSum = theta_0* + theta_1 - 
-			//THETA 0
-
-			h_0(x_i) -> 
-			elem_i.fire
-			temp_0 = 
-
-			//THETA 1
-			h_0(x_i) -> elem_i.fire
-			*x
-			temp_1 = 
+		for (list<pair<CFireDoor::TVecDoubles,bool> >::const_iterator it=lista.begin();it!=lista.end();it++){
+			// sum( h(x_i)+y_i )
+			temp_0 += (theta_0*(it->first[0]) + theta_1) - it->second;
+			// sum( h(x_i)+y_i )
+			temp_1 += ((theta_0*(it->first[0]) + theta_1) - it->second)*(it->first[0]);
 		}
-		
-		//realizar cálculos de fuera de sumatorio
-
-
-
 		//actualizar thetas.
-			theta_0 = temp_0; 
-			theta_1 = temp_1; 
+		theta_0 = theta_0 - (alpha/num_learn)*temp_0;
+		theta_1 = theta_1 - (alpha/num_learn)*temp_1;
 	}
-	
+
 }
 
 int
@@ -162,7 +149,7 @@ main(int argc,char** argv) {
 		learnFunc(game,lista);
 
 		// Get decision.
-		while (getDecision(game,lista)) { 
+		while (getDecision(game,lista)) {
 			//**** AVOIDING TO CROSS THE DOOR ****
             std::cout << "**** AVOIDING TO CROSS THE DOOR ****\n";
             game->nextStep();
