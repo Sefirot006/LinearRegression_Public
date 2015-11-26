@@ -65,17 +65,74 @@ learnFunc(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista) {
 	printList(lista);
 }
 
+/*
 bool
 getDecision(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista) {
-	//mientras no hay convergencia {
-	//	THETA 0
-	//	for (elementos lista) {
-	//		h_0(x_i) -> elem_i.fire
-	//}
-	//	for (elementos lista) {}
-	//	actualizar thetas.
-	//}
+	double theta_0 = 0;
+	double theta_1 = 0;
+	double temp_0, temp_1;
+	double aux_0,  aux_1;
+	double intParentSum;
+	
+	mientras no hay convergencia { (aux_0 != 0)	//No necesitamos aux_N
+		for (elementos lista) {
+			THETA 0
 
+			h_0(x_i) -> elem_i.fire
+			temp_0 = 
+
+			THETA 1
+			h_0(x_i) -> elem_i.fire
+			*x
+			temp_1 = 
+		}
+		
+		realizar cálculos de fuera de sumatorio
+
+
+
+		actualizar thetas.
+			theta_0 = temp_0; 
+			theta_1 = temp_1; 
+	}
+	
+}
+*/
+
+bool
+getDecision(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista) {
+	double theta_0 = 0;
+	double theta_1 = 0;
+	double temp_0, temp_1;
+	double aux_0,  aux_1;
+	double intParentSum;
+	
+	//mientras no hay convergencia.
+	while (aux_0 != 0){ //No necesitamos aux_N
+		//for (elementos lista) {
+		for (int i=0; i<num_learn; ++i){
+			intParentSum = theta_0* + theta_1 - 
+			//THETA 0
+
+			h_0(x_i) -> 
+			elem_i.fire
+			temp_0 = 
+
+			//THETA 1
+			h_0(x_i) -> elem_i.fire
+			*x
+			temp_1 = 
+		}
+		
+		//realizar cálculos de fuera de sumatorio
+
+
+
+		//actualizar thetas.
+			theta_0 = temp_0; 
+			theta_1 = temp_1; 
+	}
+	
 }
 
 int
