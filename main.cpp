@@ -9,7 +9,7 @@
 using namespace FireDoorEscaper;
 using namespace std;
 
-int alpha;
+double alpha;
 int num_learn;
 
 // Print Game Status Values
@@ -104,22 +104,35 @@ getDecision(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista) {
 	double theta_0 = 0;
 	double theta_1 = 0;
 	double temp_0, temp_1;
+	double alphaDivNum = alpha/(double)num_learn;
 
 	//mientras no hay convergencia.
-	while (temp_0 != 0){ //No necesitamos aux_N
+	do { //No necesitamos aux_N
 		temp_0=temp_1=0;
 		//for (elementos lista) {
+				//cout << "theta_0: " << theta_0 << endl;
+				//cout << "theta_1: " << theta_1 << endl;
 		for (list<pair<CFireDoor::TVecDoubles,bool> >::const_iterator it=lista.begin();it!=lista.end();it++){
 			// sum( h(x_i)+y_i )
-			temp_0 += (theta_0*(it->first[0]) + theta_1) - it->second;
+			temp_0 +=  (theta_0*(it->first[0]) + theta_1) - it->second;
 			// sum( h(x_i)+y_i )
 			temp_1 += ((theta_0*(it->first[0]) + theta_1) - it->second)*(it->first[0]);
+
+				//cout << "theta_0:	" << theta_0 << endl;
+				//cout << "it->first[0]:	" << it->first[0] << endl;
+				//cout << "theta_1:	" << theta_1 << endl;
+				//cout << "it->second:	" << it->second << endl;
+				//cout << "temp_0:		" << temp_0 << endl;
+				//cout << "temp_1:		" << temp_1 << endl;
 		}
 		//actualizar thetas.
-		theta_0 = theta_0 - (alpha/num_learn)*temp_0;
-		theta_1 = theta_1 - (alpha/num_learn)*temp_1;
-	}
-
+		theta_0 = theta_0 - alphaDivNum*temp_0;
+		theta_1 = theta_1 - alphaDivNum*temp_1;
+		break;
+	} while (temp_0 != 0);
+				//cout << "theta_0: " << theta_0 << endl;
+				//cout << "theta_1: " << theta_1 << endl;
+	return 0;
 }
 
 int
@@ -132,7 +145,7 @@ main(int argc,char** argv) {
 	}else if(argc==4){
 		level=stoi(argv[3]);
 	}
-		alpha=stoi(argv[2]);
+		alpha=stod(argv[2]);
 	num_learn=stoi(argv[1]);
 
 	list<pair<CFireDoor::TVecDoubles,bool> > lista;
