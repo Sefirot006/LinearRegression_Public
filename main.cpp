@@ -37,7 +37,6 @@ void printList(list<pair<CFireDoor::TVecDoubles,bool> >& lista){
 			cout << p.first[i] <<" ";
 		cout << "\t"<< p.second << endl;
 	}
-
 }
 
 void
@@ -52,7 +51,6 @@ insert(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista){
 
 void
 learnFunc(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista) {
-	CFireDoor::TVecDoubles last;
 
 	if(lista.size()<num_learn){
 		for(unsigned i=0;i<num_learn;++i){
@@ -61,9 +59,6 @@ learnFunc(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista) {
 			g->nextStep();
 		}
 	}
-	last=g->getCurrentFireDoor().getNextStepInputs();
-	lista.push_back(make_pair(last,true));
-
 	printList(lista);
 }
 
