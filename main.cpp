@@ -33,7 +33,7 @@ printGameStatus(const CGame& g) {
 }
 
 void printList(list<pair<CFireDoor::TVecDoubles,int> >& lista){
-	for(pair<CFireDoor::TVecDoubles,bool> p:lista){
+	for(pair<CFireDoor::TVecDoubles,int> p:lista){
 		for(unsigned i=0;i<p.first.size();++i)
 			cout << p.first[i] <<" ";
 		cout << "\t"<< p.second << endl;
@@ -62,7 +62,13 @@ learnFunc(CGame* g,list<pair<CFireDoor::TVecDoubles,int> >& lista) {
 		//lista.back().second=fd.isOnFire();
 		lista.back().second=g->getCurrentFireDoor().isOnFire();
 	}
+
+	/*// Feature Scaling
+	for (list<pair<CFireDoor::TVecDoubles,int> >::iterator it=lista.begin();it!=lista.end();it++){
+		it->first[0]=it->first[0]/20000.0;
+	}
 	printList(lista);
+	*/
 }
 
 /*
@@ -172,8 +178,8 @@ main(int argc,char** argv) {
 		// Get decision.
 		while (getDecision(game,lista)) {
 			//**** AVOIDING TO CROSS THE DOOR ****
-            std::cout << "**** AVOIDING TO CROSS THE DOOR ****\n";
-            game->nextStep();
+            		std::cout << "**** AVOIDING TO CROSS THE DOOR ****\n";
+            		game->nextStep();
 		}
 
 		// Try to cross the current FireDoor
