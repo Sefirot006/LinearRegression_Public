@@ -1,1 +1,0 @@
-/home/kirtash/Documentos/RA/FireDoor/build/CMakeFiles/FireDoorEscaper.dir
