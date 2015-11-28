@@ -1,13 +1,12 @@
-#include "LinearRegression.h"
+#include "linearRegression.h"
 
-string
-Regression::operator<<(ostream& s,const Regression& reg){
-	string s;
+ostream&
+operator<<(ostream& s,const Regression& reg){
 	s << "Linear Regression: " << endl
-		<< "Number of Dimensions: " << dim << endl
+		<< "Number of Dimensions: " << reg.dim << endl
 		<< "Theta: " << endl;
-	for(unsigned i=0;i<dim;i++)
-		s << i << ": " << theta[i];
+	for(unsigned i=0;i<reg.dim;i++)
+		s << i << ": " << reg.theta[i];
 	s << endl;
 
 	return s;
@@ -44,6 +43,14 @@ Regression& Regression::operator=(const Regression& reg){
 		Copy(reg);
 	}
 	return *this;
+}
+
+void
+Regression::Copy(const Regression& reg){
+	dim=reg.dim;
+	theta=new double[dim];
+	for(unsigned i=0;i<dim;++i)
+		theta[i]=reg.theta[i];
 }
 
 double

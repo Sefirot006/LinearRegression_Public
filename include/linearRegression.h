@@ -2,6 +2,9 @@
 #define LINEAR_REGRESSION_H_
 
 #include <string>
+#include <iostream>
+
+using namespace std;
 
 class Regression{
   friend ostream& operator<<(ostream&,const Regression&);
