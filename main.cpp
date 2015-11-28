@@ -32,7 +32,7 @@ printGameStatus(const CGame& g) {
     return fd.isOnFire();
 }
 
-void printList(list<pair<CFireDoor::TVecDoubles,bool> >& lista){
+void printList(list<pair<CFireDoor::TVecDoubles,int> >& lista){
 	for(pair<CFireDoor::TVecDoubles,bool> p:lista){
 		for(unsigned i=0;i<p.first.size();++i)
 			cout << p.first[i] <<" ";
@@ -41,17 +41,17 @@ void printList(list<pair<CFireDoor::TVecDoubles,bool> >& lista){
 }
 
 void
-insert(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista){
+insert(CGame* g,list<pair<CFireDoor::TVecDoubles,int> >& lista){
 	const CFireDoor& fd=g->getCurrentFireDoor();
 
 	if(lista.size()>0)
-		lista.back().second=fd.isOnFire();
-	lista.push_back(std::make_pair(fd.getNextStepInputs(),true));
+		fd.isOnFire() ? lista.back().second=-1 : lista.back().second=1;
+	lista.push_back(std::make_pair(fd.getNextStepInputs(),0));
 }
 
 
 void
-learnFunc(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista) {
+learnFunc(CGame* g,list<pair<CFireDoor::TVecDoubles,int> >& lista) {
 
 	if(lista.size()<num_learn){
 		for(unsigned i=0;i<num_learn;++i){
@@ -100,38 +100,46 @@ getDecision(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista) {
 */
 
 bool
-getDecision(CGame* g,list<pair<CFireDoor::TVecDoubles,bool> >& lista) {
-	double theta_0 = 0;
-	double theta_1 = 0;
+getDecision(CGame* g,list<pair<CFireDoor::TVecDoubles,int> >& lista) {
+	double theta_0 = 50;
+	double theta_1 = 50;
 	double temp_0, temp_1;
 	double alphaDivNum = alpha/(double)num_learn;
+	long int cont=0;
 
 	//mientras no hay convergencia.
 	do { //No necesitamos aux_N
 		temp_0=temp_1=0;
 		//for (elementos lista) {
-				//cout << "theta_0: " << theta_0 << endl;
-				//cout << "theta_1: " << theta_1 << endl;
-		for (list<pair<CFireDoor::TVecDoubles,bool> >::const_iterator it=lista.begin();it!=lista.end();it++){
+				cout << "theta_0: " << theta_0 << endl;
+				cout << "theta_1: " << theta_1 << endl;
+				cout << "SUmatorio:----------------------------------------" << endl;
+		for (list<pair<CFireDoor::TVecDoubles,int> >::const_iterator it=lista.begin();it!=lista.end();it++){
 			// sum( h(x_i)+y_i )
-			temp_0 +=  (theta_0*(it->first[0]) + theta_1) - it->second;
+			temp_0 +=  (theta_1*(it->first[0]) + theta_0) + it->second;
 			// sum( h(x_i)+y_i )
-			temp_1 += ((theta_0*(it->first[0]) + theta_1) - it->second)*(it->first[0]);
+			temp_1 += ((theta_1*(it->first[0]) + theta_0) + it->second)*(it->first[0]);
 
-				//cout << "theta_0:	" << theta_0 << endl;
-				//cout << "it->first[0]:	" << it->first[0] << endl;
-				//cout << "theta_1:	" << theta_1 << endl;
-				//cout << "it->second:	" << it->second << endl;
-				//cout << "temp_0:		" << temp_0 << endl;
-				//cout << "temp_1:		" << temp_1 << endl;
+				cout << "theta_0:	" << theta_0 << endl;
+				cout << "it->first[0]:	" << it->first[0] << endl;
+				cout << "theta_1:	" << theta_1 << endl;
+				cout << "it->second:	" << it->second << endl;
+				cout << "temp_0:		" << temp_0 << endl;
+				cout << "temp_1:		" << temp_1 << endl;
+				cout << "cont: " << cont << endl;
+			if(temp_0!=temp_0)
+				return false;
+			else if(temp_1!=temp_1)
+				return false;
 		}
 		//actualizar thetas.
 		theta_0 = theta_0 - alphaDivNum*temp_0;
 		theta_1 = theta_1 - alphaDivNum*temp_1;
-		break;
+		cont++;
 	} while (temp_0 != 0);
-				//cout << "theta_0: " << theta_0 << endl;
-				//cout << "theta_1: " << theta_1 << endl;
+
+				cout << "theta_0: " << theta_0 << endl;
+				cout << "theta_1: " << theta_1 << endl;
 	return 0;
 }
 
@@ -148,7 +156,7 @@ main(int argc,char** argv) {
 		alpha=stod(argv[2]);
 	num_learn=stoi(argv[1]);
 
-	list<pair<CFireDoor::TVecDoubles,bool> > lista;
+	list<pair<CFireDoor::TVecDoubles,int> > lista;
 	// Create a new game starting at level 0, and staying at the same level all the time.
 	// Use GDM_LEVELUP for increasing level of difficulty
 	CGame *game = new CGame(level);
