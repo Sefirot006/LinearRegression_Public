@@ -4,10 +4,9 @@ ostream&
 operator<<(ostream& s,const Regression& reg){
 	s << "Linear Regression: " << endl
 		<< "Number of Dimensions: " << reg.dim << endl
-		<< "Alpha: " << reg.alpha << endl
-		<< "Theta: " << endl;
-	for(unsigned i=0;i<=reg.dim;i++)
-		s << i << ": " << reg.theta[i];
+		<< "Alpha: " << reg.alpha << endl;
+		for(unsigned i=0;i<=reg.dim;i++)
+			s << "Theta_" << i << ": " << reg.theta[i] << ",";
 	s << endl;
 
 	return s;

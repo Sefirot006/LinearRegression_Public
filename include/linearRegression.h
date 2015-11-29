@@ -13,7 +13,7 @@ class Regression{
 public:
   typedef pair<double*, double> Example;
   		Regression();
-  		Regression(unsigned,double);
+  		Regression(unsigned,double);	// Constructor with dimensions and alpha
   		Regression(const Regression&);
   		~Regression();
   Regression&	operator=(const Regression&);
@@ -22,8 +22,8 @@ public:
   inline double	get_alpha();
   inline void	set_alpha(double a);
 
-  double	evaluate(double*);		// return the output of h(x)
-						  // recieves a vector of n dimension
+  double	evaluate(double*);	// return the output of h(x)
+					  // recieves a vector of n dimension
   void		gradient_descent(const vector<Example>&);
 
 private:
