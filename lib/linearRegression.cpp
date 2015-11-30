@@ -26,6 +26,9 @@ Regression::Regression(unsigned dimensions,double alpha){
 
 	dim=dimensions;
 	theta=new double[dimensions+1];
+	for(unsigned i=0;i<=dimensions;++i)
+		theta[i]=20;
+
 	this->alpha=alpha;
 }
 
