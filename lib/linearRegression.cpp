@@ -68,7 +68,10 @@ void
 Regression::gradient_descent(const vector<Example>& train_set){
 	double* temp=new double[dim+1];
 	double alphaDivNum= alpha/dim;
-	unsigned i;
+	unsigned i,k;
+	k=0;
+	ofstream file;
+	file.open("exit.csv");
 
 	do{
 		for(i=0;i<=dim;++i)
@@ -81,9 +84,13 @@ Regression::gradient_descent(const vector<Example>& train_set){
 				// temp_j = temp_j + (h(x_i) - y_i) * x_i
 				temp[j] += (evaluate(train_set[i].first) - train_set[i].second) *train_set[i].first[j];
 		}
-		for(i=0;i<=dim;++i)
+		for(i=0;i<=dim;++i){
 			// theta_i = theta_i - 1/m * alpha *temp_i
 			theta[i] -= alphaDivNum*temp[i];
-
-	}while(temp[0]!=0);
+			file << theta[i] << ",";
+		}
+		file << endl;
+		k++;
+	}while(k<30);
+	file.close();
 }
