@@ -98,4 +98,5 @@ Regression::gradient_descent(const vector<Example>& train_set){
 		k++;
 	}while(k<30000);
 	file.close();
+
 }

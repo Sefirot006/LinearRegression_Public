@@ -8,6 +8,7 @@
 
 using namespace std;
 
+
 class Regression{
   // Output operator
   friend ostream& operator<<(ostream&,const Regression&);

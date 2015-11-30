@@ -41,5 +41,6 @@ main(int argc,char** argv){
 
 	reg.gradient_descent(list);
 
+
 	return 1;
 }
