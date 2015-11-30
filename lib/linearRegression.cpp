@@ -27,7 +27,7 @@ Regression::Regression(unsigned dimensions,double alpha){
 	dim=dimensions;
 	theta=new double[dimensions+1];
 	for(unsigned i=0;i<=dimensions;++i)
-		theta[i]=20;
+		theta[i]=0.0;
 
 	this->alpha=alpha;
 }
@@ -70,7 +70,7 @@ Regression::evaluate(double* x){
 void
 Regression::gradient_descent(const vector<Example>& train_set){
 	double* temp=new double[dim+1];
-	double alphaDivNum= alpha/dim;
+	double alphaDivNum= alpha/train_set.size();
 	unsigned i,k;
 	k=0;
 	ofstream file;
@@ -90,10 +90,12 @@ Regression::gradient_descent(const vector<Example>& train_set){
 		for(i=0;i<=dim;++i){
 			// theta_i = theta_i - 1/m * alpha *temp_i
 			theta[i] -= alphaDivNum*temp[i];
-			file << theta[i] << ",";
+			if(k%100==0)
+				file << theta[i] << ",";
 		}
-		file << endl;
+		if(k%100==0)
+			file << endl;
 		k++;
-	}while(k<30);
+	}while(k<30000);
 	file.close();
 }

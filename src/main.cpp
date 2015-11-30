@@ -17,7 +17,7 @@ void insertExample(string& s,vector<Regression::Example >& l){
 
 int
 main(int argc,char** argv){
-	Regression reg(1,0.0001);
+	Regression reg(1,0.000002);
 	cout << reg;
 
 	ifstream f;
