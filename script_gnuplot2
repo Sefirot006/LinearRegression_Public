@@ -1,0 +1,6 @@
+#set size 0.75, 0.75
+#set size 1, 1
+set term png size 600, 400
+set output "figure.png"
+set datafile separator ","
+plot 'data.csv' with points

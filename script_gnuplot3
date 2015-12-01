@@ -8,8 +8,8 @@ set title "Regresión lineal"
 set term png size 600, 400
 set output "figure.png"
 set datafile separator ","
-plot 'data1.csv' with points, \
-0.000465+0.09455*x, 0.0049169+0.999976*x, 0.0048142+0.999976*x with lines
+plot 'data2.csv' with points, \
+0.0004652+0.0949337*x, 0.00500463+0.994453*x, 0.00515013+0.994492*x, 0.143571+0.993816*x, 0.0286954+0.994377*x, 0.396718+0.992579*x with lines
 #     'exit.csv' with lines
 
 #linea(n) = getline("file_%d", n)

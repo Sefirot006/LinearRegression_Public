@@ -90,13 +90,19 @@ Regression::gradient_descent(const vector<Example>& train_set){
 		for(i=0;i<=dim;++i){
 			// theta_i = theta_i - 1/m * alpha *temp_i
 			theta[i] -= alphaDivNum*temp[i];
-			if(k%100==0)
-				file << theta[i] << ",";
+			if(k%100==0){
+				if(i==0)
+					file << theta[i] << "+";
+				else if(i==dim)
+					file << theta[i] << "*x" << endl;
+				else
+					file << theta[i] << "*x+";
+			}
 		}
-		if(k%100==0)
-			file << endl;
+		//if(k%100==0)
+		//	file << endl;
 		k++;
-	}while(k<30000);
+	}while(k<300000);
 	file.close();
 
 }
