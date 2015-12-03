@@ -15,6 +15,7 @@ operator<<(ostream& s,const Regression& reg){
 Regression::Regression(){
 	dim=1;
 	theta=new double;
+	theta_aux=new double;
 	alpha=1.0;
 }
 
@@ -26,8 +27,11 @@ Regression::Regression(unsigned dimensions,double alpha){
 
 	dim=dimensions;
 	theta=new double[dimensions+1];
-	for(unsigned i=0;i<=dimensions;++i)
+	theta_aux=new double[dimensions+1];
+	for(unsigned i=0;i<=dimensions;++i){
 		theta[i]=0.0;
+		theta_aux[i]=0.0;
+	}
 
 	this->alpha=alpha;
 }
@@ -40,6 +44,8 @@ Regression::~Regression(){
 	dim=0;
 	alpha=0.0;
 	if(theta!=NULL)
+		delete [] theta;
+	if(theta_aux!=NULL)
 		delete [] theta;
 }
 
@@ -54,9 +60,18 @@ Regression& Regression::operator=(const Regression& reg){
 void
 Regression::Copy(const Regression& reg){
 	dim=reg.dim;
-	theta=new double[dim];
+	theta=new double[dim+1];
+	theta_aux=new double[dim+1];
 	for(unsigned i=0;i<=dim;++i)
 		theta[i]=reg.theta[i];
+}
+
+double
+Regression::convergence()const{
+	double conv=0.0;
+	for(unsigned i=0;i<=dim;++i)
+		conv+=abs(theta[i]-theta_aux[i]);
+	return conv;
 }
 
 double
@@ -73,6 +88,7 @@ Regression::gradient_descent(const vector<Example>& train_set){
 	double alphaDivNum= alpha/train_set.size();
 	unsigned i,k;
 	k=0;
+
 	ofstream file;
 	file.open("exit.csv");
 
@@ -88,13 +104,15 @@ Regression::gradient_descent(const vector<Example>& train_set){
 				temp[j] += (evaluate(train_set[i].first) - train_set[i].second) *train_set[i].first[j];
 		}
 		for(i=0;i<=dim;++i){
+			// Copy last values of theta for convergence
+			theta_aux[i]=theta[i];
 			// theta_i = theta_i - 1/m * alpha *temp_i
 			theta[i] -= alphaDivNum*temp[i];
 			if(k%100==0){
 				if(i==0)
 					file << theta[i] << "+";
 				else if(i==dim)
-					file << theta[i] << "*x" << endl;
+					file << theta[i] << "*x, ";
 				else
 					file << theta[i] << "*x+";
 			}
@@ -102,7 +120,7 @@ Regression::gradient_descent(const vector<Example>& train_set){
 		//if(k%100==0)
 		//	file << endl;
 		k++;
-	}while(k<300000);
+	}while(k<3000 && convergence()>0.0001*dim);
 	file.close();
 
 }

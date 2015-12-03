@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <cmath>
 #include <fstream>
 #include <vector>
 
@@ -36,8 +37,10 @@ public:
 
 private:
   void		Copy(const Regression&);
+  double	convergence()const;
 
   double*	theta;		// Vector theta parameters of hypotesis
+  double*	theta_aux;	// Auxiliar to calculate convergence
   unsigned	dim;		// Number of dimensions
   double	alpha;		// Trainning rate
 };
