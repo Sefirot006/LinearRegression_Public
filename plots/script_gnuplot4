@@ -1,0 +1,6 @@
+set title "Regresión lineal"
+
+set term png size 600, 400
+set output "figure.png"
+set datafile separator ","
+plot 'data2.csv' with points, \

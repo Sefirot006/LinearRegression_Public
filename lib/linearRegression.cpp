@@ -46,7 +46,7 @@ Regression::~Regression(){
 	if(theta!=NULL)
 		delete [] theta;
 	if(theta_aux!=NULL)
-		delete [] theta;
+		delete [] theta_aux;
 }
 
 Regression& Regression::operator=(const Regression& reg){
@@ -108,7 +108,7 @@ Regression::gradient_descent(const vector<Example>& train_set){
 			theta_aux[i]=theta[i];
 			// theta_i = theta_i - 1/m * alpha *temp_i
 			theta[i] -= alphaDivNum*temp[i];
-			if(k%100==0){
+			if(k%10==0){
 				if(i==0)
 					file << theta[i] << "+";
 				else if(i==dim)
@@ -120,7 +120,8 @@ Regression::gradient_descent(const vector<Example>& train_set){
 		//if(k%100==0)
 		//	file << endl;
 		k++;
-	}while(k<3000 && convergence()>0.0001*dim);
+	}while(k<30000 && convergence()>0.0001*dim);
+	cout << k << endl;
 	file.close();
 
 }
