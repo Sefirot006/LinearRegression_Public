@@ -1,0 +1,19 @@
+#!/bin/bash
+# -*- ENCODING: UTF-8 -*-
+
+make clean
+make
+./main $1
+
+echo "set title \"Regresión lineal\"" > script_temp
+echo "set term png size 600, 400" >> script_temp
+echo "set output \"figure.png\"" >> script_temp
+echo "set datafile separator \",\"" >> script_temp
+printf "plot '"$1"' with points, \\" >> script_temp
+echo "" >> script_temp
+cat exit.csv >> script_temp
+echo "0*x with lines" >> script_temp
+gnuplot script_temp
+rm script_temp
+#rm exit.csv
+#eog image.png
