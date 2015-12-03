@@ -12,7 +12,8 @@ operator<<(ostream& s,const Regression& reg){
 	return s;
 }
 
-Regression::Regression(){
+Regression::Regression()
+{
 	dim=1;
 	theta=new double;
 	theta_aux=new double;
@@ -75,7 +76,7 @@ Regression::convergence()const{
 }
 
 double
-Regression::evaluate(double* x){
+Regression::evaluate(const double* const x)const{
 	double y=theta[0];
 	for(unsigned i=1;i<=dim;++i)
 		y+=theta[i]*x[i];

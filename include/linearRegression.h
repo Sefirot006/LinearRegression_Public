@@ -27,11 +27,11 @@ public:
   Regression&	operator=(const Regression&);	// Assingment operator
 
   // Getters and setters
-  inline unsigned get_dim();
-  inline double	get_alpha();
+  inline unsigned get_dim()const;
+  inline double	get_alpha()const;
   inline void	set_alpha(double a);
 
-  double	evaluate(double*);	// return the output of h(x)
+  double	evaluate(const double*const)const;	// return the output of h(x)
 					  // recieves a vector of n dimension
   void		gradient_descent(const vector<Example>&); // Gradient descent learning function
 
@@ -46,10 +46,10 @@ private:
 };
 
 inline unsigned
-Regression::get_dim() { return dim; }
+Regression::get_dim()const { return dim; }
 
 inline double
-Regression::get_alpha() { return alpha; }
+Regression::get_alpha()const { return alpha; }
 
 inline void
 Regression::set_alpha(double a) { alpha=a; }
