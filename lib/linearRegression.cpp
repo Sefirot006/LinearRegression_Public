@@ -122,7 +122,8 @@ Regression::gradient_descent(const vector<Example>& train_set){
 		//	file << endl;
 		k++;
 	}while(k<30000 && convergence()>0.0001*dim);
+
 	cout << k << endl;
 	file.close();
-
+	delete [] temp;
 }
