@@ -34,6 +34,13 @@ Trainning_Set::Trainning_Set(const char* filename,int dimensions): set(){
 
 void
 Trainning_Set::insert(const string& str){
+	double* x=new double[dim+1];
+	x[0]=1.0;
+	//TODO hacer algoritmo para mas de 1 dimension
+	x[1]=stod(str.substr(0,str.find(',')));
+	double y=stod(str.substr(str.find(',')+1));
+
+	set.push_back(make_pair(x,y));
 
 }
 
