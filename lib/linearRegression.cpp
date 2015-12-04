@@ -20,7 +20,7 @@ Regression::Regression()
 	alpha=1.0;
 }
 
-Regression::Regression(unsigned dimensions,double alpha){
+Regression::Regression(int dimensions,double alpha){
 	if(dimensions<1){
 		cerr << "Error: cannot create Regression of <1 dimensions" << endl;
 		return;
