@@ -12,10 +12,15 @@ operator<<(ostream& s,const Regression& reg){
 	return s;
 }
 
-Trainning_Set::Trainning_Set(const char* filename): set(){
+Trainning_Set::Trainning_Set(const char* filename,int dimensions): set(){
+	if(dimensions<1){
+		cerr << "Error: cannot create Trainning Set of <1 dimensions" << endl;
+		return;
+	}else
+		dim=dimensions;
+
 	ifstream file;
 	file.open(filename);
-
 	if(file){
 		string read;
 		while(!file.eof()){

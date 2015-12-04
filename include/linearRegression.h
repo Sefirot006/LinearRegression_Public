@@ -12,30 +12,35 @@ using namespace std;
 class Trainning_Set{
 public:
   inline	Trainning_Set();			// Void constructor
-  		Trainning_Set(const char*);		// Constructor with the name of a file to read
+  		Trainning_Set(const char*,int);		// Constructor with the name of a file to read
   inline 	~Trainning_Set();
   inline	Trainning_Set(const Trainning_Set&);	// Copy constructor
   Trainning_Set& operator=(const Trainning_Set&); 	// Assignment operator
 
   const double* get_x(int pos) const;
   double  	get_y(int pos) const;
+  inline int	get_dim() const;
 private:
   inline bool	bound_check(int) const;
   void		insert(const string&);
 
-  vector<pair<double*, double> > set;
+  vector<pair<double*, double> > set;	// Trainning set
+  int 		dim;			// Dimensions
 };
 
 inline
-Trainning_Set::Trainning_Set(): set()
+Trainning_Set::Trainning_Set(): set(),dim(0)
 {  }
 
 inline
-Trainning_Set::Trainning_Set(const Trainning_Set& ts): set(ts.set)
+Trainning_Set::Trainning_Set(const Trainning_Set& ts): set(ts.set),dim(ts.dim)
 { }
 
 inline
-Trainning_Set::~Trainning_Set() { }
+Trainning_Set::~Trainning_Set() { dim=0; }
+
+inline int
+Trainning_Set::get_dim() const { return dim; }
 
 inline bool
 Trainning_Set::bound_check(int pos) const
