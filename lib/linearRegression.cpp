@@ -12,10 +12,25 @@ operator<<(ostream& s,const Regression& reg){
 	return s;
 }
 
-Trainning_Set::Trainning_Set(const string&){
+Trainning_Set::Trainning_Set(const char* filename): set(){
+	ifstream file;
+	file.open(filename);
 
+	if(file){
+		string read;
+		while(!file.eof()){
+			getline(file,read);
+			if(!read.empty())
+				insert(read);
+		}
+	}else
+		cerr << "Error al abrir el archivo "<< filename << endl;
 }
 
+void
+Trainning_Set::insert(const string& str){
+
+}
 
 const double*
 Trainning_Set::get_x(int pos) const{
