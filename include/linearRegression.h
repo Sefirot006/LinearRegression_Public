@@ -32,7 +32,6 @@ public:
   // and (second) the value of output
   typedef pair<double*, double> Example;
 
-  		Regression();			// Void Constructor
   		Regression(unsigned,double);	// Constructor with dimensions and alpha
   		Regression(const Regression&);	// Copy Constructor
   		~Regression();			// Destructor
@@ -48,6 +47,7 @@ public:
   void		gradient_descent(const vector<Example>&); // Gradient descent learning function
 
 private:
+    		Regression();			// Void Constructor
   void		Copy(const Regression&);
   double	convergence()const;
 

@@ -14,7 +14,7 @@ operator<<(ostream& s,const Regression& reg){
 
 Regression::Regression()
 {
-	dim=1;
+	dim=0;
 	theta=new double;
 	theta_aux=new double;
 	alpha=1.0;
