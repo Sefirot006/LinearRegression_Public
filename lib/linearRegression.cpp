@@ -12,6 +12,24 @@ operator<<(ostream& s,const Regression& reg){
 	return s;
 }
 
+Trainning_Set::Trainning_Set(const string&){
+
+}
+
+const double*
+Trainning_Set::get_x(int pos) const{
+	if(bound_check())
+		return set[pos].first;
+	return 0x0;
+}
+
+double
+Trainning_Set::get_y(int pos) const{
+	if(bound_check())
+		return set[pos].second;
+	return 0.0;
+}
+
 Regression::Regression()
 {
 	dim=0;

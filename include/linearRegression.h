@@ -11,16 +11,27 @@ using namespace std;
 
 class Trainning_Set{
 public:
-  		Trainning_Set();			// Void constructor
+  inline	Trainning_Set();			// Void constructor
   		Trainning_Set(const string&);		// Constructor with the name of a file to read
   		Trainning_Set(const Trainning_Set&);	// Copy constructor
   Trainning_Set& operator=(const Trainning_Set&); 	// Assignment operator
 
-  inline double* get_x(int pos);
-  inline double  get_y(int pos);
+  const double* get_x(int pos) const;
+  double  	get_y(int pos) const;
 private:
+  void 		Copy(const Trainning_Set&);
+  intline bool	bound_check(int) const;
+
   vector<pair<double*, double> > set;
 };
+
+inline
+Trainning_Set::Trainning_Set(): set()
+{  }
+
+inline
+Trainning_Set::bound_check(int pos) const
+{ return pos<0 || pos>=set.size(); }
 
 class Regression{
   // Output operator
@@ -32,7 +43,7 @@ public:
   // and (second) the value of output
   typedef pair<double*, double> Example;
 
-  		Regression(unsigned,double);	// Constructor with dimensions and alpha
+  		Regression(int,double);		// Constructor with dimensions and alpha
   		Regression(const Regression&);	// Copy Constructor
   		~Regression();			// Destructor
   Regression&	operator=(const Regression&);	// Assingment operator
@@ -43,7 +54,7 @@ public:
   inline void	set_alpha(double a);
 
   double	evaluate(const double*const)const;	// return the output of h(x)
-					  // recieves a vector of n dimension
+					  		// recieves a vector of n dimension
   void		gradient_descent(const vector<Example>&); // Gradient descent learning function
 
 private:
