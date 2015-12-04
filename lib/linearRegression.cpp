@@ -21,8 +21,8 @@ Regression::Regression()
 }
 
 Regression::Regression(unsigned dimensions,double alpha){
-	if(dimensions==0){
-		cerr << "Error: cannot create Regression of 0 dimensions" << endl;
+	if(dimensions<1){
+		cerr << "Error: cannot create Regression of <1 dimensions" << endl;
 		return;
 	}
 

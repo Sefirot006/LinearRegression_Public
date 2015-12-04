@@ -9,6 +9,18 @@
 
 using namespace std;
 
+class Trainning_Set{
+public:
+  		Trainning_Set();			// Void constructor
+  		Trainning_Set(const string&);		// Constructor with the name of a file to read
+  		Trainning_Set(const Trainning_Set&);	// Copy constructor
+  Trainning_Set& operator=(const Trainning_Set&); 	// Assignment operator
+
+  inline double* get_x(int pos);
+  inline double  get_y(int pos);
+private:
+  vector<pair<double*, double> > set;
+};
 
 class Regression{
   // Output operator
