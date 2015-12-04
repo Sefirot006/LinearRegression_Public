@@ -16,4 +16,4 @@ echo "0*x with lines" >> script_temp
 gnuplot script_temp
 rm script_temp
 #rm exit.csv
-#eog image.png
+eog figure.png
