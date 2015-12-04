@@ -26,7 +26,6 @@ main(int argc,char** argv){
 		cerr << "Error: no se pudo abrir el archivo." << endl;
 		return 0;
 	}
-
 	string read;
 	vector<Regression::Example > list;
 	unsigned x=0;

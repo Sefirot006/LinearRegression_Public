@@ -13,14 +13,14 @@ class Trainning_Set{
 public:
   inline	Trainning_Set();			// Void constructor
   		Trainning_Set(const string&);		// Constructor with the name of a file to read
-  		Trainning_Set(const Trainning_Set&);	// Copy constructor
+  inline 	~Trainning_Set();
+  inline	Trainning_Set(const Trainning_Set&);	// Copy constructor
   Trainning_Set& operator=(const Trainning_Set&); 	// Assignment operator
 
   const double* get_x(int pos) const;
   double  	get_y(int pos) const;
 private:
-  void 		Copy(const Trainning_Set&);
-  intline bool	bound_check(int) const;
+  inline bool	bound_check(int) const;
 
   vector<pair<double*, double> > set;
 };
@@ -30,6 +30,13 @@ Trainning_Set::Trainning_Set(): set()
 {  }
 
 inline
+Trainning_Set::Trainning_Set(const Trainning_Set& ts): set(ts.set)
+{ }
+
+inline
+Trainning_Set::~Trainning_Set() { }
+
+inline bool
 Trainning_Set::bound_check(int pos) const
 { return pos<0 || pos>=set.size(); }
 
