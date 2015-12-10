@@ -38,19 +38,13 @@ Trainning_Set::Trainning_Set(const char* filename,int dimensions): set(){
 			if(!read.empty())
 				insert(read);
 		}
+		file.close();
 	}else
 		cerr << "Error al abrir el archivo "<< filename << endl;
 }
 
 void
 Trainning_Set::insert(const string& str){
-	/*
-	double* x=new double[dim+1];
-	x[0]=1.0;
-	//TODO hacer algoritmo para mas de 1 dimension
-	x[1]=stod(str.substr(0,str.find(',')));
-	double y=stod(str.substr(str.find(',')+1));*/
-
 	vector<double> x;
 	x.push_back(1.0);
 	string::size_type pos,last_pos;
@@ -66,16 +60,17 @@ Trainning_Set::insert(const string& str){
 
 }
 
-const vector<double>
-Trainning_Set::get_x(int pos) const{
-	if(bound_check(pos))
-		return set[pos].first;
-	return vector<double>();
+double
+Trainning_Set::get_x(int ex,int pos) const{
+	if(bound_check(ex,set.size()))
+		if(bound_check(pos,set[ex].first.size()))
+			return set[ex].first[pos];
+	return 0.0;
 }
 
 double
 Trainning_Set::get_y(int pos) const{
-	if(bound_check(pos))
+	if(bound_check(pos,set.size()))
 		return set[pos].second;
 	return 0.0;
 }

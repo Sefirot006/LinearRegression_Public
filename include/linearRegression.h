@@ -18,11 +18,11 @@ public:
   inline	Trainning_Set(const Trainning_Set&);	// Copy constructor
   Trainning_Set& operator=(const Trainning_Set&); 	// Assignment operator
 
-  const vector<double> get_x(int pos) const;
+  double 	get_x(int,int) const;
   double  	get_y(int pos) const;
   inline int	get_dim() const;
 private:
-  inline bool	bound_check(int) const;
+  inline bool	bound_check(int,int) const;
   void		insert(const string&);
 
   vector<pair<vector<double>, double> > set;	// Trainning set
@@ -44,8 +44,8 @@ inline int
 Trainning_Set::get_dim() const { return dim; }
 
 inline bool
-Trainning_Set::bound_check(int pos) const
-{ return pos>0 && pos<=set.size(); }
+Trainning_Set::bound_check(int pos,int tam) const
+{ return pos>0 && pos<=tam; }
 
 class Regression{
   // Output operator
