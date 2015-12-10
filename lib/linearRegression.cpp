@@ -12,6 +12,16 @@ operator<<(ostream& s,const Regression& reg){
 	return s;
 }
 
+ostream&
+operator<<(ostream& s,const Trainning_Set& t){
+	for(unsigned i=0;i<t.set.size();++i){
+		for(unsigned j=0;j<t.set[i].first.size();++j)
+			s << t.set[i].first[j] << ",";
+		s << t.set[i].second << endl;
+	}
+	return s;
+}
+
 Trainning_Set::Trainning_Set(const char* filename,int dimensions): set(){
 	if(dimensions<1){
 		cerr << "Error: cannot create Trainning Set of <1 dimensions" << endl;
@@ -34,21 +44,33 @@ Trainning_Set::Trainning_Set(const char* filename,int dimensions): set(){
 
 void
 Trainning_Set::insert(const string& str){
+	/*
 	double* x=new double[dim+1];
 	x[0]=1.0;
 	//TODO hacer algoritmo para mas de 1 dimension
 	x[1]=stod(str.substr(0,str.find(',')));
-	double y=stod(str.substr(str.find(',')+1));
+	double y=stod(str.substr(str.find(',')+1));*/
 
-	set.push_back(make_pair(x,y));
+	vector<double> x;
+	x.push_back(1.0);
+	string::size_type pos,last_pos;
+	pos=0;
+	while(pos!=string::npos){
+		last_pos=pos;
+		pos=str.find(',',last_pos+1);
+		if(pos!=string::npos)
+			x.push_back(stod(str.substr(last_pos,pos)));
+		else
+			set.push_back(make_pair(x,stod(str.substr(last_pos+1))));
+	}
 
 }
 
-const double*
+const vector<double>
 Trainning_Set::get_x(int pos) const{
 	if(bound_check(pos))
 		return set[pos].first;
-	return 0x0;
+	return vector<double>();
 }
 
 double

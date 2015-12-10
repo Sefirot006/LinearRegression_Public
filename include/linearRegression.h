@@ -10,6 +10,7 @@
 using namespace std;
 
 class Trainning_Set{
+  friend ostream& operator<<(ostream&,const Trainning_Set&);
 public:
   inline	Trainning_Set();			// Void constructor
   		Trainning_Set(const char*,int);		// Constructor with the name of a file to read
@@ -17,15 +18,15 @@ public:
   inline	Trainning_Set(const Trainning_Set&);	// Copy constructor
   Trainning_Set& operator=(const Trainning_Set&); 	// Assignment operator
 
-  const double* get_x(int pos) const;
+  const vector<double> get_x(int pos) const;
   double  	get_y(int pos) const;
   inline int	get_dim() const;
 private:
   inline bool	bound_check(int) const;
   void		insert(const string&);
 
-  vector<pair<double*, double> > set;	// Trainning set
-  int 		dim;			// Dimensions
+  vector<pair<vector<double>, double> > set;	// Trainning set
+  int 		dim;				// Dimensions
 };
 
 inline
@@ -44,7 +45,7 @@ Trainning_Set::get_dim() const { return dim; }
 
 inline bool
 Trainning_Set::bound_check(int pos) const
-{ return pos<0 || pos>=set.size(); }
+{ return pos>0 && pos<=set.size(); }
 
 class Regression{
   // Output operator
