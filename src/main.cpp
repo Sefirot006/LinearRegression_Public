@@ -17,7 +17,7 @@ void insertExample(string& s,vector<Regression::Example >& l){
 
 int
 main(int argc,char** argv){
-	Regression reg(1,0.000003);
+	Regression reg(1,0.00000001);
 	cout << reg;
 
 	ifstream f;
@@ -34,12 +34,15 @@ main(int argc,char** argv){
 		if(!read.empty())
 			insertExample(read,list);
 	}
+	f.close();
+	Trainning_Set train(argv[1],1);
 
 	for(Regression::Example ex: list)
 		cout << ex.first[1] << "," << ex.second << endl;
 
 	reg.gradient_descent(list);
 
+	//cout << train;
 
 	return 1;
 }
