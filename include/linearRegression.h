@@ -18,11 +18,11 @@ public:
   inline	Trainning_Set(const Trainning_Set&);	// Copy constructor
   Trainning_Set& operator=(const Trainning_Set&); 	// Assignment operator
 
-  double 	get_x(int,int) const;
+  double 	get_x(int,int) const;			// get x_i of a trainning example
   double  	get_y(int pos) const;
   inline int	get_dim() const;
   inline int	size()const;
-  const vector<double>& get_x(int) const;
+  const vector<double>& get_x(int) const;		// get vector of x's of a trainngin example
 private:
   inline bool	bound_check(int,int) const;
   void		insert(const string&);
