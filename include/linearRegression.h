@@ -31,37 +31,11 @@ private:
   int 		dim;				// Dimensions
 };
 
-inline
-Trainning_Set::Trainning_Set(): set(),dim(0)
-{  }
-
-inline
-Trainning_Set::Trainning_Set(const Trainning_Set& ts): set(ts.set),dim(ts.dim)
-{ }
-
-inline
-Trainning_Set::~Trainning_Set() { dim=0; }
-
-inline int
-Trainning_Set::get_dim() const { return dim; }
-
-inline int
-Trainning_Set::size() const { return set.size(); }
-
-inline bool
-Trainning_Set::bound_check(int pos,int tam) const
-{ return pos>0 && pos<=tam; }
-
 class Regression{
   // Output operator
   friend ostream& operator<<(ostream&,const Regression&);
 
 public:
-  // Trainning example type
-  // It has (first) an n+1 dimensional vector with the first value=1
-  // and (second) the value of output
-  typedef pair<double*, double> Example;
-
   		Regression(int,double);		// Constructor with dimensions and alpha
   		Regression(const Regression&);	// Copy Constructor
   		~Regression();			// Destructor
@@ -86,6 +60,31 @@ private:
   unsigned	dim;		// Number of dimensions
   double	alpha;		// Trainning rate
 };
+
+//////////////////
+// INLINE METHODS
+//////////////////
+
+inline
+Trainning_Set::Trainning_Set(): set(),dim(0)
+{  }
+
+inline
+Trainning_Set::Trainning_Set(const Trainning_Set& ts): set(ts.set),dim(ts.dim)
+{ }
+
+inline
+Trainning_Set::~Trainning_Set() { dim=0; }
+
+inline int
+Trainning_Set::get_dim() const { return dim; }
+
+inline int
+Trainning_Set::size() const { return set.size(); }
+
+inline bool
+Trainning_Set::bound_check(int pos,int tam) const
+{ return pos>0 && pos<=tam; }
 
 inline unsigned
 Regression::get_dim()const { return dim; }
