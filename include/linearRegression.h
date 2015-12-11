@@ -21,6 +21,7 @@ public:
   double 	get_x(int,int) const;
   double  	get_y(int pos) const;
   inline int	get_dim() const;
+  inline int	size()const;
   const vector<double>& get_x(int) const;
 private:
   inline bool	bound_check(int,int) const;
@@ -43,6 +44,9 @@ Trainning_Set::~Trainning_Set() { dim=0; }
 
 inline int
 Trainning_Set::get_dim() const { return dim; }
+
+inline int
+Trainning_Set::size() const { return set.size(); }
 
 inline bool
 Trainning_Set::bound_check(int pos,int tam) const
@@ -68,9 +72,9 @@ public:
   inline double	get_alpha()const;
   inline void	set_alpha(double a);
 
-  double	evaluate(const double*const)const;	// return the output of h(x)
+  double	evaluate(const vector<double>&)const;	// return the output of h(x)
 					  		// recieves a vector of n dimension
-  void		gradient_descent(const vector<Example>&); // Gradient descent learning function
+  void		gradient_descent(const Trainning_Set&); // Gradient descent learning function
 
 private:
     		Regression();			// Void Constructor

@@ -144,7 +144,7 @@ Regression::convergence()const{
 }
 
 double
-Regression::evaluate(const double* const x)const{
+Regression::evaluate(const vector<double>& x)const{
 	double y=theta[0];
 	for(unsigned i=1;i<=dim;++i)
 		y+=theta[i]*x[i];
@@ -152,7 +152,7 @@ Regression::evaluate(const double* const x)const{
 }
 
 void
-Regression::gradient_descent(const vector<Example>& train_set){
+Regression::gradient_descent(const Trainning_Set& train_set){
 	double* temp=new double[dim+1];
 	double alphaDivNum= alpha/train_set.size();
 	unsigned i,k;
@@ -170,7 +170,7 @@ Regression::gradient_descent(const vector<Example>& train_set){
 			// Recorrer vector temp
 			for(unsigned j=0;j<=dim;++j)
 				// temp_j = temp_j + (h(x_i) - y_i) * x_i
-				temp[j] += (evaluate(train_set[i].first) - train_set[i].second) *train_set[i].first[j];
+				temp[j] += (evaluate(train_set.get_x(i)) - train_set.get_y(i)) *train_set.get_x(i,j);
 		}
 		for(i=0;i<=dim;++i){
 			// Copy last values of theta for convergence
