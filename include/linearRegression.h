@@ -21,6 +21,7 @@ public:
   double 	get_x(int,int) const;
   double  	get_y(int pos) const;
   inline int	get_dim() const;
+  const vector<double>& get_x(int) const;
 private:
   inline bool	bound_check(int,int) const;
   void		insert(const string&);

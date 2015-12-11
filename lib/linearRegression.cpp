@@ -75,6 +75,11 @@ Trainning_Set::get_y(int pos) const{
 	return 0.0;
 }
 
+const vector<double>&
+Trainning_Set::get_x(int ex) const{
+	return set[ex].first;
+}
+
 Regression::Regression()
 {
 	dim=0;
