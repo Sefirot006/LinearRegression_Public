@@ -57,7 +57,6 @@ Trainning_Set::insert(const string& str){
 		else
 			set.push_back(make_pair(x,stod(str.substr(last_pos+1))));
 	}
-
 }
 
 double
@@ -165,13 +164,13 @@ Regression::gradient_descent(const Trainning_Set& train_set){
 		for(i=0;i<=dim;++i)
 			temp[i]=0;
 
-		// Recorrer vector ejemplos
-		for(i=0;i<train_set.size();++i){
-			// Recorrer vector temp
-			for(unsigned j=0;j<=dim;++j)
+		// Recorrer vector temp
+		for(unsigned j=0;j<=dim;++j)
+			// Recorrer vector ejemplos
+			for(i=0;i<train_set.size();++i)
 				// temp_j = temp_j + (h(x_i) - y_i) * x_i
 				temp[j] += (evaluate(train_set.get_x(i)) - train_set.get_y(i)) *train_set.get_x(i,j);
-		}
+		
 		for(i=0;i<=dim;++i){
 			// Copy last values of theta for convergence
 			theta_aux[i]=theta[i];
