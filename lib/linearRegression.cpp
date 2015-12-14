@@ -15,7 +15,7 @@ operator<<(ostream& s,const Regression& reg){
 ostream&
 operator<<(ostream& s,const Trainning_Set& t){
 	for(unsigned i=0;i<t.set.size();++i){
-		for(unsigned j=0;j<t.set[i].first.size();++j)
+		for(unsigned j=1;j<t.set[i].first.size();++j)
 			s << t.set[i].first[j] << ",";
 		s << t.set[i].second << endl;
 	}
@@ -78,6 +78,51 @@ Trainning_Set::get_y(int pos) const{
 const vector<double>&
 Trainning_Set::get_x(int ex) const{
 	return set[ex].first;
+}
+
+void
+Trainning_Set::normalize(){
+	for(unsigned i=1;i<=dim;++i)
+		normalize_x(i);
+	normalize_y();
+}
+
+void
+Trainning_Set::normalize_x(int x){
+	double max,min,avg,range;
+	max=min=avg=0.0;
+	for(unsigned i=0;i<set.size();++i){
+		if(max<set[i].first[x])
+			max=set[i].first[x];
+		if(min>set[i].first[x])
+			min=set[i].first[x];
+		avg+=set[i].first[x];
+	}
+	avg=avg/set.size();
+	range=max-min;
+
+	for(unsigned i=0;i<set.size();++i){
+		set[i].first[x]=(set[i].first[x]-avg)/range;
+	}
+}
+
+void
+Trainning_Set::normalize_y(){
+	double max,min,avg,range;
+	max=min=avg=0.0;
+	for(unsigned i=0;i<set.size();++i){
+		if(max<set[i].second)
+			max=set[i].second;
+		if(min>set[i].second)
+			min=set[i].second;
+		avg+=set[i].second;
+	}
+	avg=avg/set.size();
+	range=max-min;
+
+	for(unsigned i=0;i<set.size();++i){
+		set[i].second=(set[i].second-avg)/range;
+	}
 }
 
 Regression::Regression()

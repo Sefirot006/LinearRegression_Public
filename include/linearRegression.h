@@ -23,7 +23,11 @@ public:
   inline int	get_dim() const;
   inline int	size()const;
   const vector<double>& get_x(int) const;		// get vector of x's of a trainngin example
+
+  void		normalize();				// Normalize features
 private:
+  void		normalize_y();				// Normalize y
+  void		normalize_x(int);			// Normalize vector x features
   inline bool	bound_check(int,int) const;
   void		insert(const string&);
 
@@ -49,7 +53,7 @@ public:
   double	evaluate(const vector<double>&)const;	// return the output of h(x)
 					  		// recieves a vector of n dimension
   void		gradient_descent(const Trainning_Set&); // Gradient descent learning function
-
+  void		normalize(Trainning_Set&)const;
 private:
     		Regression();			// Void Constructor
   void		Copy(const Regression&);
