@@ -189,7 +189,7 @@ Regression::gradient_descent(const Trainning_Set& train_set){
 		//if(k%100==0)
 		//	file << endl;
 		k++;
-	}while(k<30000 && convergence()>0.0001*dim);
+	}while(k<maxIter && (convergence() > minConv*dim));
 
 	cout << k << endl;
 	file.close();

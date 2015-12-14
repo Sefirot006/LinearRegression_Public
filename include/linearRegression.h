@@ -12,23 +12,23 @@ using namespace std;
 class Trainning_Set{
   friend ostream& operator<<(ostream&,const Trainning_Set&);
 public:
-  inline	Trainning_Set();			// Void constructor
-  		Trainning_Set(const char*,int);		// Constructor with the name of a file to read
-  inline 	~Trainning_Set();
-  inline	Trainning_Set(const Trainning_Set&);	// Copy constructor
-  Trainning_Set& operator=(const Trainning_Set&); 	// Assignment operator
+  inline Trainning_Set(); // Void constructor
+  Trainning_Set(const char*,int); // Constructor with the name of a file to read
+  inline ~Trainning_Set();
+  inline Trainning_Set(const Trainning_Set&); // Copy constructor
+  Trainning_Set& operator=(const Trainning_Set&); // Assignment operator
 
-  double 	get_x(int,int) const;			// get x_i of a trainning example
-  double  	get_y(int pos) const;
-  inline int	get_dim() const;
-  inline int	size()const;
-  const vector<double>& get_x(int) const;		// get vector of x's of a trainngin example
+  double get_x(int,int) const; // get x_i of a trainning example
+  double get_y(int pos) const;
+  inline int get_dim() const;
+  inline int size()const;
+  const vector<double>& get_x(int) const; // get vector of x's of a trainngin example
 private:
-  inline bool	bound_check(int,int) const;
-  void		insert(const string&);
+  inline bool bound_check(int,int) const;
+  void insert(const string&);
 
-  vector<pair<vector<double>, double> > set;	// Trainning set
-  int 		dim;				// Dimensions
+  vector<pair<vector<double>, double> > set; // Trainning set
+  int dim; // Dimensions
 };
 
 class Regression{
@@ -36,29 +36,31 @@ class Regression{
   friend ostream& operator<<(ostream&,const Regression&);
 
 public:
-  		Regression(int,double);		// Constructor with dimensions and alpha
-  		Regression(const Regression&);	// Copy Constructor
-  		~Regression();			// Destructor
-  Regression&	operator=(const Regression&);	// Assingment operator
+  Regression(int,double); // Constructor with dimensions and alpha
+  Regression(const Regression&); // Copy Constructor
+  ~Regression(); // Destructor
+  Regression& operator=(const Regression&); // Assingment operator
 
   // Getters and setters
   inline unsigned get_dim()const;
-  inline double	get_alpha()const;
-  inline void	set_alpha(double a);
+  inline double get_alpha()const;
+  inline void set_alpha(double a);
 
-  double	evaluate(const vector<double>&)const;	// return the output of h(x)
-					  		// recieves a vector of n dimension
-  void		gradient_descent(const Trainning_Set&); // Gradient descent learning function
+  double evaluate(const vector<double>&)const; // return the output of h(x)
+  // recieves a vector of n dimension
+  void gradient_descent(const Trainning_Set&); // Gradient descent learning function
 
 private:
-    		Regression();			// Void Constructor
-  void		Copy(const Regression&);
-  double	convergence()const;
+  Regression(); // Void Constructor
+  void Copy(const Regression&);
+  double convergence()const;
 
-  double*	theta;		// Vector theta parameters of hypotesis
-  double*	theta_aux;	// Auxiliar to calculate convergence
-  unsigned	dim;		// Number of dimensions
-  double	alpha;		// Trainning rate
+  double* theta; // Vector theta parameters of hypotesis
+  double* theta_aux; // Auxiliar to calculate convergence
+  unsigned dim; // Number of dimensions
+  double alpha; // Trainning rate
+  static const maxIter = 30000;
+  static const minConv = 0.0001;
 };
 
 //////////////////
@@ -67,7 +69,7 @@ private:
 
 inline
 Trainning_Set::Trainning_Set(): set(),dim(0)
-{  }
+{ }
 
 inline
 Trainning_Set::Trainning_Set(const Trainning_Set& ts): set(ts.set),dim(ts.dim)
