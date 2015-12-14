@@ -31,8 +31,8 @@ private:
   inline bool	bound_check(int,int) const;
   void		insert(const string&);
 
-  vector<pair<vector<double>, double> > set;	// Trainning set
-  int 		dim;				// Dimensions
+  vector<pair<vector<double>, double> > set; // Trainning set
+  int dim; // Dimensions
 };
 
 class Regression{
@@ -40,29 +40,31 @@ class Regression{
   friend ostream& operator<<(ostream&,const Regression&);
 
 public:
-  		Regression(int,double);		// Constructor with dimensions and alpha
-  		Regression(const Regression&);	// Copy Constructor
-  		~Regression();			// Destructor
-  Regression&	operator=(const Regression&);	// Assingment operator
+  Regression(int,double); // Constructor with dimensions and alpha
+  Regression(const Regression&); // Copy Constructor
+  ~Regression(); // Destructor
+  Regression& operator=(const Regression&); // Assingment operator
 
   // Getters and setters
   inline unsigned get_dim()const;
-  inline double	get_alpha()const;
-  inline void	set_alpha(double a);
+  inline double get_alpha()const;
+  inline void set_alpha(double a);
 
-  double	evaluate(const vector<double>&)const;	// return the output of h(x)
-					  		// recieves a vector of n dimension
-  void		gradient_descent(const Trainning_Set&); // Gradient descent learning function
-  void		normalize(Trainning_Set&)const;
+
+  double evaluate(const vector<double>&)const; // return the output of h(x)
+					       // recieves a vector of n dimension
+  void gradient_descent(const Trainning_Set&); // Gradient descent learning function
 private:
-    		Regression();			// Void Constructor
-  void		Copy(const Regression&);
-  double	convergence()const;
+  Regression(); // Void Constructor
+  void Copy(const Regression&);
+  double convergence()const;
 
-  double*	theta;		// Vector theta parameters of hypotesis
-  double*	theta_aux;	// Auxiliar to calculate convergence
-  unsigned	dim;		// Number of dimensions
-  double	alpha;		// Trainning rate
+  double* theta; // Vector theta parameters of hypotesis
+  double* theta_aux; // Auxiliar to calculate convergence
+  unsigned dim; // Number of dimensions
+  double alpha; // Trainning rate
+  static const maxIter = 30000;
+  static const minConv = 0.0001;
 };
 
 //////////////////
@@ -71,7 +73,7 @@ private:
 
 inline
 Trainning_Set::Trainning_Set(): set(),dim(0)
-{  }
+{ }
 
 inline
 Trainning_Set::Trainning_Set(const Trainning_Set& ts): set(ts.set),dim(ts.dim)
