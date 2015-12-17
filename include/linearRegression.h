@@ -32,6 +32,7 @@ private:
   void insert(const string&);
 
   vector<pair<vector<double>, double> > set; // Trainning set
+  
   int dim; // Dimensions
 };
 
