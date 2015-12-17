@@ -13,16 +13,15 @@ main(int argc,char** argv){
 
 	Trainning_Set train(argv[1],1);
 	cout << train;
-	train.normalize();
-	cout << train;
+	Trainning_Set trainAux(train);
+	trainAux.normalize();
+	cout << trainAux;
 
 	ofstream file;
 	file.open("norm_temp");
 	if(file)
-		file<< train;
+		file<< trainAux;
 
-	reg.gradient_descent(train);
-
-
+	reg.gradient_descent(trainAux);
 	return 1;
 }
