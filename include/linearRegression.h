@@ -25,6 +25,7 @@ public:
   const vector<double>& get_x(int) const; // get vector of x's of a trainngin example
 
   void normalize();                   // Normalize features
+  vector<pair<int,int>> norm;                 // Set of <average, range>
 private:
   void normalize_y();                 // Normalize y
   void normalize_x(int);              // Normalize vector x features
@@ -32,7 +33,6 @@ private:
   void insert(const string&);
 
   vector<pair<vector<double>, double> > set;  // Trainning set
-  vector<pair<int,int>> norm;                 // Set of <average, range>
   int dim; // Dimensions
 };
 
