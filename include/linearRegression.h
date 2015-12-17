@@ -62,8 +62,8 @@ private:
   double* theta_aux; // Auxiliar to calculate convergence
   unsigned dim; // Number of dimensions
   double alpha; // Trainning rate
-  static const maxIter = 30000;
-  static const minConv = 0.0001;
+  static const int maxIter = 30000;
+  static constexpr double minConv = 0.0001;
 };
 
 //////////////////
