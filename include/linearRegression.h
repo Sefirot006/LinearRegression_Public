@@ -15,7 +15,7 @@ public:
   inline Trainning_Set();  // Void constructor
   Trainning_Set(const char*,int); // Constructor with the name of a file to read
   inline ~Trainning_Set();
-  inline Trainning_Set(const Trainning_Set&); // Copy constructor
+  Trainning_Set(const Trainning_Set&); // Copy constructor
   Trainning_Set& operator=(const Trainning_Set&); // Assignment operator
 
   double get_x(int,int) const;  // get x_i of a training example
@@ -25,12 +25,9 @@ public:
   const vector<double>& get_x(int) const; // get vector of x's of a trainngin example
 
   void normalize();                   // Normalize features
-  void normalizeTrainingSet();        // Normalize features
 private:
   void normalize_y();                 // Normalize y
   void normalize_x(int);              // Normalize vector x features
-  void normalizeTrainingSet_y();      // Normalize y
-  void normalizeTrainingSet_x(int);   // Normalize vector x features
   inline bool bound_check(int,int) const;
   void insert(const string&);
 

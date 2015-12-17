@@ -42,7 +42,7 @@ Trainning_Set::Trainning_Set(const char* filename,int dimensions): set(){
     }else
         cerr << "Error al abrir el archivo "<< filename << endl;
 }
-
+/*
 void
 Trainning_Set::insert(const string& str){
     vector<double> x;
@@ -56,6 +56,24 @@ Trainning_Set::insert(const string& str){
             x.push_back(stod(str.substr(last_pos,pos)));
         else
             set.push_back(make_pair(x,stod(str.substr(last_pos+1))));
+    }
+}*/
+void
+Trainning_Set::insert(const string& str){
+    vector<double> x;
+    x.push_back(1.0);
+    string::size_type pos,last_pos;
+    last_pos=pos=0;
+    while(pos!=string::npos){
+        //last_pos=pos;
+        pos=str.find(',',last_pos);
+        if(pos!=string::npos) {
+            x.push_back(stod(str.substr(last_pos,pos)));
+            last_pos=pos;
+            ++last_pos;
+        }
+        else
+            set.push_back(make_pair(x,stod(str.substr(last_pos))));
     }
 }
 
@@ -124,53 +142,7 @@ Trainning_Set::normalize_y(){
     }
 }
 
-void
-Trainning_Set::normalizeTrainingSet(){
-    for(unsigned i=1;i<=dim;++i)
-        normalizeTrainingSet_x(i);
-    normalizeTrainingSet_y();
-}
-
-void
-Trainning_Set::normalizeTrainingSet_x(int x){
-    double max,min,avg,range;
-    max=min=avg=0.0;
-    for(unsigned i=0;i<set.size();++i){
-        if(max<set[i].first[x])
-            max=set[i].first[x];
-        if(min>set[i].first[x])
-            min=set[i].first[x];
-        avg+=set[i].first[x];
-    }
-    avg=avg/set.size();
-    range=max-min;
-
-    for(unsigned i=0;i<set.size();++i){
-        set[i].first[x]=(set[i].first[x]-avg)/range;
-    }
-}
-
-void
-Trainning_Set::normalizeTrainingSet_y(){
-    double max,min,avg,range;
-    max=min=avg=0.0;
-    for(unsigned i=0;i<set.size();++i){
-        if(max<set[i].second)
-            max=set[i].second;
-        if(min>set[i].second)
-            min=set[i].second;
-        avg+=set[i].second;
-    }
-    avg=avg/set.size();
-    range=max-min;
-
-    for(unsigned i=0;i<set.size();++i){
-        set[i].second=(set[i].second-avg)/range;
-    }
-}
-
-Regression::Regression()
-{
+Regression::Regression(){
     dim=0;
     theta=new double;
     theta_aux=new double;
