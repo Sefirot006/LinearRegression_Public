@@ -12,24 +12,24 @@ using namespace std;
 class Trainning_Set{
   friend ostream& operator<<(ostream&,const Trainning_Set&);
 public:
-  inline	Trainning_Set();			// Void constructor
-  		Trainning_Set(const char*,int);		// Constructor with the name of a file to read
-  inline 	~Trainning_Set();
-  inline	Trainning_Set(const Trainning_Set&);	// Copy constructor
-  Trainning_Set& operator=(const Trainning_Set&); 	// Assignment operator
+  inline Trainning_Set();  // Void constructor
+  Trainning_Set(const char*,int); // Constructor with the name of a file to read
+  inline ~Trainning_Set();
+  inline Trainning_Set(const Trainning_Set&); // Copy constructor
+  Trainning_Set& operator=(const Trainning_Set&); // Assignment operator
 
-  double 	get_x(int,int) const;			// get x_i of a trainning example
-  double  	get_y(int pos) const;
-  inline int	get_dim() const;
-  inline int	size()const;
-  const vector<double>& get_x(int) const;		// get vector of x's of a trainngin example
+  double get_x(int,int) const;  // get x_i of a trainning example
+  double get_y(int pos) const;
+  inline int get_dim() const;
+  inline int size()const;
+  const vector<double>& get_x(int) const; // get vector of x's of a trainngin example
 
-  void		normalize();				// Normalize features
+  void normalize();  // Normalize features
 private:
-  void		normalize_y();				// Normalize y
-  void		normalize_x(int);			// Normalize vector x features
-  inline bool	bound_check(int,int) const;
-  void		insert(const string&);
+  void normalize_y();  // Normalize y
+  void normalize_x(int);  // Normalize vector x features
+  inline bool bound_check(int,int) const;
+  void insert(const string&);
 
   vector<pair<vector<double>, double> > set; // Trainning set
   int dim; // Dimensions
@@ -51,8 +51,7 @@ public:
   inline void set_alpha(double a);
 
 
-  double evaluate(const vector<double>&)const; // return the output of h(x)
-					       // recieves a vector of n dimension
+  double evaluate(const vector<double>&)const; // Recieves a vector of n dimension and returns the output of h(x)
   void gradient_descent(const Trainning_Set&); // Gradient descent learning function
 private:
   Regression(); // Void Constructor
