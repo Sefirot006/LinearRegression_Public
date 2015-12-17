@@ -124,6 +124,51 @@ Trainning_Set::normalize_y(){
     }
 }
 
+void
+Trainning_Set::normalizeTrainingSet(){
+    for(unsigned i=1;i<=dim;++i)
+        normalizeTrainingSet_x(i);
+    normalizeTrainingSet_y();
+}
+
+void
+Trainning_Set::normalizeTrainingSet_x(int x){
+    double max,min,avg,range;
+    max=min=avg=0.0;
+    for(unsigned i=0;i<set.size();++i){
+        if(max<set[i].first[x])
+            max=set[i].first[x];
+        if(min>set[i].first[x])
+            min=set[i].first[x];
+        avg+=set[i].first[x];
+    }
+    avg=avg/set.size();
+    range=max-min;
+
+    for(unsigned i=0;i<set.size();++i){
+        set[i].first[x]=(set[i].first[x]-avg)/range;
+    }
+}
+
+void
+Trainning_Set::normalizeTrainingSet_y(){
+    double max,min,avg,range;
+    max=min=avg=0.0;
+    for(unsigned i=0;i<set.size();++i){
+        if(max<set[i].second)
+            max=set[i].second;
+        if(min>set[i].second)
+            min=set[i].second;
+        avg+=set[i].second;
+    }
+    avg=avg/set.size();
+    range=max-min;
+
+    for(unsigned i=0;i<set.size();++i){
+        set[i].second=(set[i].second-avg)/range;
+    }
+}
+
 Regression::Regression()
 {
     dim=0;

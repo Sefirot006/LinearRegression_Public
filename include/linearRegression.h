@@ -18,16 +18,19 @@ public:
   inline Trainning_Set(const Trainning_Set&); // Copy constructor
   Trainning_Set& operator=(const Trainning_Set&); // Assignment operator
 
-  double get_x(int,int) const;  // get x_i of a trainning example
+  double get_x(int,int) const;  // get x_i of a training example
   double get_y(int pos) const;
   inline int get_dim() const;
   inline int size()const;
   const vector<double>& get_x(int) const; // get vector of x's of a trainngin example
 
-  void normalize();  // Normalize features
+  void normalize();                   // Normalize features
+  void normalizeTrainingSet();        // Normalize features
 private:
-  void normalize_y();  // Normalize y
-  void normalize_x(int);  // Normalize vector x features
+  void normalize_y();                 // Normalize y
+  void normalize_x(int);              // Normalize vector x features
+  void normalizeTrainingSet_y();      // Normalize y
+  void normalizeTrainingSet_x(int);   // Normalize vector x features
   inline bool bound_check(int,int) const;
   void insert(const string&);
 
