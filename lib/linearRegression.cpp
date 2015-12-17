@@ -160,8 +160,8 @@ Trainning_Set::normalize_x(int x){
             min=elem;
         avg+=elem;
     }
-    avg=avg/set.size();
-    range=max-min;
+    norm.first[x]   = avg=avg/set.size();
+    norm.second[x]  = range=max-min;
 
     for(unsigned i=0;i<set.size();++i){ //Normalization.
         set[i].first[x]=(set[i].first[x]-avg)/range;
@@ -186,8 +186,8 @@ Trainning_Set::normalize_y(){
             min=elem;
         avg+=elem;
     }
-    avg=avg/set.size();
-    range=max-min;
+    norm.first[ dim +1]  = avg=avg/set.size();
+    norm.second[dim +1]  = range=max-min;
 
     for(unsigned i=0;i<set.size();++i){
         set[i].second=(set[i].second-avg)/range;
@@ -284,7 +284,7 @@ Regression::gradient_descent(const Trainning_Set& train_set){
             for(i=0;i<train_set.size();++i)
                 // temp_j = temp_j + (h(x_i) - y_i) * x_i
                 temp[j] += (evaluate(train_set.get_x(i)) - train_set.get_y(i)) *train_set.get_x(i,j);
-        
+
         for(i=0;i<=dim;++i){
             // Copy last values of theta for convergence
             theta_aux[i]=theta[i];
@@ -292,11 +292,11 @@ Regression::gradient_descent(const Trainning_Set& train_set){
             theta[i] -= alphaDivNum*temp[i];
             if(k%10==0){
                 if(i==0)
-                    file << theta[i] << "+";
+                    file << (theta[i]*train_set.norm.second[i+1])+train_set.norm.first[i+1] << "+";
                 else if(i==dim)
-                    file << theta[i] << "*x, ";
+                    file << (theta[i]*train_set.norm.second[i+1])+train_set.norm.first[i+1] << "*x, ";
                 else
-                    file << theta[i] << "*x+";
+                    file << (theta[i]*train_set.norm.second[i+1])+train_set.norm.first[i+1] << "*x+";
             }
         }
         //if(k%100==0)

@@ -31,8 +31,8 @@ private:
   inline bool bound_check(int,int) const;
   void insert(const string&);
 
-  vector<pair<vector<double>, double> > set; // Trainning set
-  
+  vector<pair<vector<double>, double> > set;  // Trainning set
+  vector<pair<int,int>> norm;                 // Set of <average, range>
   int dim; // Dimensions
 };
 
