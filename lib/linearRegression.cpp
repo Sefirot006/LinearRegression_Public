@@ -284,3 +284,15 @@ Regression::gradient_descent(const Trainning_Set& train_set){
     file.close();
     delete [] temp;
 }
+
+void
+Regression::normal_equation(const Trainning_Set&){
+
+}
+
+bool
+Regression::inverse(boost::numeric::ublas::matrix<double>& mat,
+		boost::numeric::ublas::matrix<double>& inverse)const{
+
+	return true;
+}
