@@ -12,20 +12,20 @@ using namespace std;
 class Trainning_Set{
   friend ostream& operator<<(ostream&,const Trainning_Set&);
 public:
-  inline Trainning_Set();  // Void constructor
-  Trainning_Set(const char*,int); // Constructor with the name of a file to read
+  inline Trainning_Set();             // Void constructor
+  Trainning_Set(const char*,int);     // Constructor with the name of a file to read
   inline ~Trainning_Set();
-  Trainning_Set(const Trainning_Set&); // Copy constructor
+  Trainning_Set(const Trainning_Set&);// Copy constructor
   Trainning_Set& operator=(const Trainning_Set&); // Assignment operator
 
-  double get_x(int,int) const;  // get x_i of a training example
+  double get_x(int,int) const;        // get x_i of a training example
   double get_y(int pos) const;
   inline int get_dim() const;
   inline int size()const;
   const vector<double>& get_x(int) const; // get vector of x's of a trainngin example
 
   void normalize();                   // Normalize features
-  vector<pair<int,int>> norm;                 // Set of <average, range>
+  vector<pair<int,int>> norm;         // Set of <average, range>
 private:
   void normalize_y();                 // Normalize y
   void normalize_x(int);              // Normalize vector x features
@@ -50,7 +50,6 @@ public:
   inline unsigned get_dim()const;
   inline double get_alpha()const;
   inline void set_alpha(double a);
-
 
   double evaluate(const vector<double>&)const; // Recieves a vector of n dimension and returns the output of h(x)
   void gradient_descent(const Trainning_Set&); // Gradient descent learning function

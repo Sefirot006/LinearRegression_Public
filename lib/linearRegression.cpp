@@ -99,6 +99,7 @@ Trainning_Set::get_x(int ex) const{
 
 void
 Trainning_Set::normalize(){
+    norm.clear();
     for(unsigned i=1;i<=dim;++i)
         normalize_x(i);
     normalize_y();
@@ -160,8 +161,11 @@ Trainning_Set::normalize_x(int x){
             min=elem;
         avg+=elem;
     }
-    norm[x].first  = avg=avg/set.size();
-    norm[x].second = range=max-min;
+    avg=avg/set.size();
+    range=max-min;
+    norm.push_back(make_pair(avg,range));
+    //norm[x].first  = avg=avg/set.size();
+    //norm[x].second = range=max-min;
 
     for(unsigned i=0;i<set.size();++i){ //Normalization.
         set[i].first[x]=(set[i].first[x]-avg)/range;
@@ -186,8 +190,11 @@ Trainning_Set::normalize_y(){
             min=elem;
         avg+=elem;
     }
-    norm[dim +1].first  = avg=avg/set.size();
-    norm[dim +1].second = range=max-min;
+    avg=avg/set.size();
+    range=max-min;
+    norm.push_back(make_pair(avg,range));
+    //norm[dim +1].first  = avg=avg/set.size();
+    //norm[dim +1].second = range=max-min;
 
     for(unsigned i=0;i<set.size();++i){
         set[i].second=(set[i].second-avg)/range;
