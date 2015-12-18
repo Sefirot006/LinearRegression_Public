@@ -149,9 +149,13 @@ Trainning_Set::normalize_x(int x){
     avg=0.0;
     
     //max=min=avg=0.0;
-    (set.size()>0)
-    ? max=min=0.0
-    : max=min=set[0].first[x];
+    //(set.size()>0)
+    //? max=min=0.0
+    //: max=min=set[0].first[x];
+    if (set.size()>0)
+        max=min=set[0].second;
+    else
+        return;
 
     for(unsigned i=0;i<set.size();++i){
         elem = set[i].first[x];
@@ -178,9 +182,13 @@ Trainning_Set::normalize_y(){
     double max,min,avg,range,elem;
     avg=0.0;
     //max=min=avg=0.0;
-    (set.size()>0)
-    ? max=min=0.0
-    : max=min=set[0].second;
+    //(set.size()>0)
+    //? max=min=0.0
+    //: max=min=set[0].second;
+    if (set.size()>0)
+        max=min=set[0].second;
+    else
+        return;
 
     for(unsigned i=0;i<set.size();++i){
         elem = set[i].second;
@@ -281,6 +289,10 @@ Regression::gradient_descent(const Trainning_Set& train_set){
     ofstream file;
     file.open("exit.csv");
 
+    Trainning_Set trainAux(train_set);
+    trainAux.normalize();
+    cout << trainAux;
+
     do{
         for(i=0;i<=dim;++i)
             temp[i]=0;
@@ -288,9 +300,9 @@ Regression::gradient_descent(const Trainning_Set& train_set){
         // Recorrer vector temp
         for(unsigned j=0;j<=dim;++j)
             // Recorrer vector ejemplos
-            for(i=0;i<train_set.size();++i)
+            for(i=0;i<trainAux.size();++i)
                 // temp_j = temp_j + (h(x_i) - y_i) * x_i
-                temp[j] += (evaluate(train_set.get_x(i)) - train_set.get_y(i)) *train_set.get_x(i,j);
+                temp[j] += (evaluate(trainAux.get_x(i)) - trainAux.get_y(i)) *trainAux.get_x(i,j);
 
         for(i=0;i<=dim;++i){
             // Copy last values of theta for convergence
@@ -299,11 +311,14 @@ Regression::gradient_descent(const Trainning_Set& train_set){
             theta[i] -= alphaDivNum*temp[i];
             if(k%10==0){
                 if(i==0)
-                    file << (theta[i]*train_set.norm[i+1].second)+train_set.norm[i+1].first << "+";
+                    //file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "+";
+                    file << theta[i] << "+";
                 else if(i==dim)
-                    file << (theta[i]*train_set.norm[i+1].second)+train_set.norm[i+1].first << "*x, ";
+                    //file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "*x, ";
+                    file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "*x, ";
                 else
-                    file << (theta[i]*train_set.norm[i+1].second)+train_set.norm[i+1].first << "*x+";
+                    //file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "*x+";
+                    file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "*x+";
             }
         }
         //if(k%100==0)

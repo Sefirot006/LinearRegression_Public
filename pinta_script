@@ -9,14 +9,14 @@ echo "set title \"Regresión lineal\"" > script_temp
 echo "set term png size 800, 600" >> script_temp
 echo "set output \"figure.png\"" >> script_temp
 echo "set datafile separator \",\"" >> script_temp
-#echo "set xr [0:$2]" >> script_temp
-#echo "set yr [0:$2]" >> script_temp
-printf "plot 'norm_temp' with points, \\" >> script_temp
+echo "set xr [0:$5]" >> script_temp
+echo "set yr [0:$5]" >> script_temp
+printf "plot 'train_set_points' with points, \\" >> script_temp
 echo "" >> script_temp
 cat exit.csv >> script_temp
 echo "0*x with lines" >> script_temp
 gnuplot script_temp
 rm script_temp
-rm norm_temp
+rm train_set_points
 #rm exit.csv
 eog figure.png &
