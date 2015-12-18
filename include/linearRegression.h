@@ -6,8 +6,11 @@
 #include <cmath>
 #include <fstream>
 #include <vector>
+
+//#define BOOST_UBLAS_NDEBUG 1
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/lu.hpp>
+#include <boost/numeric/ublas/io.hpp>
 
 using namespace std;
 
@@ -62,8 +65,8 @@ private:
   Regression(); // Void Constructor
   void Copy(const Regression&);
   double convergence()const;
-  bool inverse(boost::numeric::ublas::matrix<double>& mat,
-	       boost::numeric::ublas::matrix<double>& inverse)const; // Calculate the inverse matrix with LU factorization
+  bool inverse(const boost::numeric::ublas::matrix<double>& mat,
+                boost::numeric::ublas::matrix<double>& inverse)const; // Calculate the inverse matrix with LU factorization
 
   double* theta; // Vector theta parameters of hypotesis
   double* theta_aux; // Auxiliar to calculate convergence
@@ -96,7 +99,7 @@ Trainning_Set::size() const { return set.size(); }
 
 inline bool
 Trainning_Set::bound_check(int pos,int tam) const
-{ return pos>0 && pos<=tam; }
+{ return pos>=0 && pos<=tam; }
 
 inline unsigned
 Regression::get_dim()const { return dim; }
