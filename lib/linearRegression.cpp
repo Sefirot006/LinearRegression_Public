@@ -309,17 +309,19 @@ Regression::gradient_descent(const Trainning_Set& train_set){
             theta_aux[i]=theta[i];
             // theta_i = theta_i - 1/m * alpha *temp_i
             theta[i] -= alphaDivNum*temp[i];
-            if(k%10==0){
+            //if(k%10==0){
                 if(i==0)
-                    //file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "+";
-                    file << theta[i] << "+";
+                    file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "+";
+                    //file << theta[i] << "+";
                 else if(i==dim)
                     //file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "*x, ";
                     file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "*x, ";
+                    //file << theta[i] << "*x, ";
                 else
                     //file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "*x+";
                     file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "*x+";
-            }
+                    //file << theta[i] << "*x+";
+            //}
         }
         //if(k%100==0)
         //    file << endl;

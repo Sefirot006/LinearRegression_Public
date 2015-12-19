@@ -63,7 +63,8 @@ private:
   unsigned dim; // Number of dimensions
   double alpha; // Trainning rate
   static const int maxIter = 30000;
-  static constexpr double minConv = 0.0001;
+  //static constexpr double minConv = 0.0001;
+  static constexpr double minConv = 0.0000000001;
 };
 
 //////////////////
@@ -89,7 +90,7 @@ Trainning_Set::size() const { return set.size(); }
 
 inline bool
 Trainning_Set::bound_check(int pos,int tam) const
-{ return pos>0 && pos<=tam; }
+{ return pos>=0 && pos<=tam; }
 
 inline unsigned
 Regression::get_dim()const { return dim; }
