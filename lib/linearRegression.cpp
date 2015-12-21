@@ -22,6 +22,7 @@ operator<<(ostream& s,const Trainning_Set& t){
     return s;
 }
 
+//TODO ajustar parametro dimensiones automatico
 Trainning_Set::Trainning_Set(const char* filename,int dimensions): set(){
     if(dimensions<1){
         cerr << "Error: cannot create Trainning Set of <1 dimensions" << endl;
@@ -49,13 +50,15 @@ Trainning_Set::insert(const string& str){
     x.push_back(1.0);
     string::size_type pos,last_pos;
     pos=0;
+    last_pos=0;
     while(pos!=string::npos){
-        last_pos=pos;
-        pos=str.find(',',last_pos+1);
-        if(pos!=string::npos)
-            x.push_back(stod(str.substr(last_pos,pos)));
-        else
-            set.push_back(make_pair(x,stod(str.substr(last_pos+1))));
+        pos=str.find(',',last_pos);
+        if(pos!=string::npos){
+        	x.push_back(stod(str.substr(last_pos,pos)));
+        	last_pos=pos;
+        	last_pos++;
+        }else
+            set.push_back(make_pair(x,stod(str.substr(last_pos))));
     }
 }*/
 void
@@ -305,7 +308,7 @@ Regression::gradient_descent(const Trainning_Set& train_set){
                 temp[j] += (evaluate(trainAux.get_x(i)) - trainAux.get_y(i)) *trainAux.get_x(i,j);
 
         for(i=0;i<=dim;++i){
-            // Copy last values of theta for convergence
+            // Copy last valueofstream file;
             theta_aux[i]=theta[i];
             // theta_i = theta_i - 1/m * alpha *temp_i
             theta[i] -= alphaDivNum*temp[i];
@@ -331,4 +334,95 @@ Regression::gradient_descent(const Trainning_Set& train_set){
     cout << k << endl;
     file.close();
     delete [] temp;
+}
+
+
+void printMatrix(boost::numeric::ublas::matrix<double> matrix) {
+    cout << "-----Matrix-----" << endl;
+    for (unsigned int i=0; i < matrix.size1(); i++) {
+        cout << "{";
+        for (unsigned int j=0; j < matrix.size2(); j++) {
+            cout << matrix(i, j);
+            if(j+1 != matrix.size2()) {
+                cout << ",";
+            }
+        }
+        cout << "}," << endl;
+    }
+    cout << endl;
+}
+
+void
+Regression::normal_equation(const Trainning_Set& train_set){
+	boost::numeric::ublas::matrix<double> X (train_set.size(),train_set.get_dim()+1);
+	boost::numeric::ublas::matrix<double> X_t (train_set.get_dim()+1,train_set.size());
+	boost::numeric::ublas::vector<double> y (train_set.size());
+
+	// Obtaining X and transpose of X
+	for(unsigned i=0; i < train_set.size(); ++i){
+		for(unsigned j=0; j <= train_set.get_dim(); ++j){
+			X(i,j) = train_set.get_x(i,j);
+			X_t(j,i) = train_set.get_x(i,j);
+		}
+        y(i) = train_set.get_y(i);
+	}
+	// X = X · X^t
+	X=boost::numeric::ublas::prod(X_t,X);
+
+    // A = X^-1
+    boost::numeric::ublas::matrix<double> A(X.size1(),X.size2());
+	inverse(X,A);
+
+    // A = A · X^t
+    A=prod(A,X_t);
+	// y = A · y
+    y=prod(A,y);
+
+    // Copy values to theta
+    ofstream file;
+    file.open("exit.csv");
+    for(unsigned i=0;i<=dim;++i){
+        theta[i]=y[i];
+        if(i==0)
+            file << theta[i] << "+";
+        else if(i==dim)
+            file << theta[i] << "*x, ";
+        else
+            file << theta[i] << "*x+";
+    }
+    /* Prueba funcion inverse
+	boost::numeric::ublas::matrix<double> aux2(4,4),aux3(4,4);
+    aux2(0,0)=-1; aux2(0,1)=3; aux2(0,2)=1; aux2(0,3)=-1;
+    aux2(1,0)=-4; aux2(1,1)=-10; aux2(1,2)=0; aux2(1,3)=4;
+	aux2(2,0)=0; aux2(2,1)=7; aux2(2,2)=-2; aux2(2,3)=-4;
+	aux2(3,0)=-7; aux2(3,1)=-14; aux2(3,2)=1; aux2(3,3)=5;
+	printMatrix(aux2);
+	inverse(aux2,aux3);
+	aux3*=8;
+	printMatrix(aux3);
+	*/
+}
+
+bool
+Regression::inverse(const boost::numeric::ublas::matrix<double>& mat,
+                    boost::numeric::ublas::matrix<double>& inverse)const{
+
+    using namespace boost::numeric::ublas;
+ 	typedef permutation_matrix<std::size_t> pmatrix;
+ 	// create a working copy of the input
+ 	matrix<double> A(mat);
+ 	// create a permutation matrix for the LU-factorization
+ 	pmatrix pm(A.size1());
+
+ 	// perform LU-factorization
+ 	int res = lu_factorize(A,pm);
+    if( res != 0 ) return false;
+
+ 	// create identity matrix of "inverse"
+ 	inverse.assign(identity_matrix<double>(A.size1()));
+
+ 	// backsubstitute to get the inverse
+ 	lu_substitute(A, pm, inverse);
+
+	return true;
 }

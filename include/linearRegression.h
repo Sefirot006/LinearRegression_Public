@@ -7,6 +7,11 @@
 #include <fstream>
 #include <vector>
 
+//#define BOOST_UBLAS_NDEBUG 1
+#include <boost/numeric/ublas/matrix.hpp>
+#include <boost/numeric/ublas/lu.hpp>
+#include <boost/numeric/ublas/io.hpp>
+
 using namespace std;
 
 class Trainning_Set{
@@ -53,10 +58,13 @@ public:
 
   double evaluate(const vector<double>&)const; // Recieves a vector of n dimension and returns the output of h(x)
   void gradient_descent(const Trainning_Set&); // Gradient descent learning function
+  void normal_equation(const Trainning_Set&);  // Normal equation method
 private:
   Regression(); // Void Constructor
   void Copy(const Regression&);
   double convergence()const;
+  bool inverse(const boost::numeric::ublas::matrix<double>& mat,
+                boost::numeric::ublas::matrix<double>& inverse)const; // Calculate the inverse matrix with LU factorization
 
   double* theta; // Vector theta parameters of hypotesis
   double* theta_aux; // Auxiliar to calculate convergence
