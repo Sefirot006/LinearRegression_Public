@@ -337,7 +337,7 @@ Regression::gradient_descent(const Trainning_Set& train_set){
 }
 
 
-void printMatrix(boost::numeric::ublas::matrix<double> matrix) {
+void Regression::printMatrix(const ublas::matrix<double>& matrix)const {
     cout << "-----Matrix-----" << endl;
     for (unsigned int i=0; i < matrix.size1(); i++) {
         cout << "{";

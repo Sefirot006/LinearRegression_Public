@@ -53,17 +53,18 @@ public:
   Regression& operator=(const Regression&); // Assingment operator
 
   // Getters and setters
-  inline unsigned get_dim()const;
-  inline double get_alpha()const;
+  inline unsigned get_dim() const;
+  inline double get_alpha() const;
   inline void set_alpha(double a);
 
-  double evaluate(const vector<double>&)const; // Recieves a vector of n dimension and returns the output of h(x)
+  double evaluate(const vector<double>&) const; // Recieves a vector of n dimension and returns the output of h(x)
   void gradient_descent(const Trainning_Set&); // Gradient descent learning function
   void normal_equation(const Trainning_Set&);  // Normal equation method
 private:
   Regression(); // Void Constructor
   void Copy(const Regression&);
-  double convergence()const;
+  double convergence() const;
+  void printMatrix(const ublas::matrix<double>&) const;
   bool inverse(const ublas::matrix<double>& mat,
                 ublas::matrix<double>& inverse)const; // Calculate the inverse matrix with LU factorization
 
