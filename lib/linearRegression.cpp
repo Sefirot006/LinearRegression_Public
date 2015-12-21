@@ -354,9 +354,9 @@ void printMatrix(boost::numeric::ublas::matrix<double> matrix) {
 
 void
 Regression::normal_equation(const Trainning_Set& train_set){
-	boost::numeric::ublas::matrix<double> X (train_set.size(),train_set.get_dim()+1);
-	boost::numeric::ublas::matrix<double> X_t (train_set.get_dim()+1,train_set.size());
-	boost::numeric::ublas::vector<double> y (train_set.size());
+	ublas::matrix<double> X (train_set.size(),train_set.get_dim()+1);
+	ublas::matrix<double> X_t (train_set.get_dim()+1,train_set.size());
+	ublas::vector<double> y (train_set.size());
 
 	// Obtaining X and transpose of X
 	for(unsigned i=0; i < train_set.size(); ++i){
@@ -367,10 +367,10 @@ Regression::normal_equation(const Trainning_Set& train_set){
         y(i) = train_set.get_y(i);
 	}
 	// X = X · X^t
-	X=boost::numeric::ublas::prod(X_t,X);
+	X=ublas::prod(X_t,X);
 
     // A = X^-1
-    boost::numeric::ublas::matrix<double> A(X.size1(),X.size2());
+    ublas::matrix<double> A(X.size1(),X.size2());
 	inverse(X,A);
 
     // A = A · X^t
@@ -391,7 +391,7 @@ Regression::normal_equation(const Trainning_Set& train_set){
             file << theta[i] << "*x+";
     }
     /* Prueba funcion inverse
-	boost::numeric::ublas::matrix<double> aux2(4,4),aux3(4,4);
+	ublas::matrix<double> aux2(4,4),aux3(4,4);
     aux2(0,0)=-1; aux2(0,1)=3; aux2(0,2)=1; aux2(0,3)=-1;
     aux2(1,0)=-4; aux2(1,1)=-10; aux2(1,2)=0; aux2(1,3)=4;
 	aux2(2,0)=0; aux2(2,1)=7; aux2(2,2)=-2; aux2(2,3)=-4;
@@ -404,10 +404,10 @@ Regression::normal_equation(const Trainning_Set& train_set){
 }
 
 bool
-Regression::inverse(const boost::numeric::ublas::matrix<double>& mat,
-                    boost::numeric::ublas::matrix<double>& inverse)const{
+Regression::inverse(const ublas::matrix<double>& mat,
+                    ublas::matrix<double>& inverse)const{
+    using namespace ublas;
 
-    using namespace boost::numeric::ublas;
  	typedef permutation_matrix<std::size_t> pmatrix;
  	// create a working copy of the input
  	matrix<double> A(mat);

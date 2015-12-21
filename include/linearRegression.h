@@ -13,6 +13,7 @@
 #include <boost/numeric/ublas/io.hpp>
 
 using namespace std;
+namespace ublas = boost::numeric::ublas;
 
 class Trainning_Set{
   friend ostream& operator<<(ostream&,const Trainning_Set&);
@@ -63,8 +64,8 @@ private:
   Regression(); // Void Constructor
   void Copy(const Regression&);
   double convergence()const;
-  bool inverse(const boost::numeric::ublas::matrix<double>& mat,
-                boost::numeric::ublas::matrix<double>& inverse)const; // Calculate the inverse matrix with LU factorization
+  bool inverse(const ublas::matrix<double>& mat,
+                ublas::matrix<double>& inverse)const; // Calculate the inverse matrix with LU factorization
 
   double* theta; // Vector theta parameters of hypotesis
   double* theta_aux; // Auxiliar to calculate convergence
