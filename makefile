@@ -5,7 +5,7 @@ OPTIONS= -g -std=gnu++0x
 DEBUG= #-D DEBUG
 LIBDIR=lib
 INCLUDEDIR=include
-_OBJ= linearRegression.o
+_OBJ= linearRegression.o trainningSet.o
 OBJ = $(patsubst %,$(LIBDIR)/%,$(_OBJ))
 
 all: main
