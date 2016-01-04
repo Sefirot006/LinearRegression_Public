@@ -1,7 +1,7 @@
 #include "linearRegression.h"
 
 ostream&
-operator<<(ostream& s,const Regression& reg){
+operator<<(ostream& s,const LinearReg& reg){
     s << "Linear Regression: " << endl
         << "Number of Dimensions: " << reg.dim << endl
         << "Alpha: " << reg.alpha << endl;
@@ -12,16 +12,16 @@ operator<<(ostream& s,const Regression& reg){
     return s;
 }
 
-Regression::Regression(){
+LinearReg::LinearReg(){
     dim=0;
     theta=new double;
     theta_aux=new double;
     alpha=1.0;
 }
 
-Regression::Regression(int dimensions,double alpha){
+LinearReg::LinearReg(int dimensions,double alpha){
     if(dimensions<1){
-        cerr << "Error: cannot create Regression of <1 dimensions" << endl;
+        cerr << "Error: cannot create LinearReg of <1 dimensions" << endl;
         return;
     }
 
@@ -36,11 +36,11 @@ Regression::Regression(int dimensions,double alpha){
     this->alpha=alpha;
 }
 
-Regression::Regression(const Regression& reg){
+LinearReg::LinearReg(const LinearReg& reg){
     Copy(reg);
 }
 
-Regression::~Regression(){
+LinearReg::~LinearReg(){
     dim=0;
     alpha=0.0;
     if(theta!=NULL)
@@ -49,16 +49,16 @@ Regression::~Regression(){
         delete [] theta_aux;
 }
 
-Regression& Regression::operator=(const Regression& reg){
+LinearReg& LinearReg::operator=(const LinearReg& reg){
     if(this!=&reg){
-        (*this).~Regression();
+        (*this).~LinearReg();
         Copy(reg);
     }
     return *this;
 }
 
 void
-Regression::Copy(const Regression& reg){
+LinearReg::Copy(const LinearReg& reg){
     dim=reg.dim;
     theta=new double[dim+1];
     theta_aux=new double[dim+1];
@@ -67,7 +67,7 @@ Regression::Copy(const Regression& reg){
 }
 
 double
-Regression::convergence()const{
+LinearReg::convergence()const{
     double conv=0.0;
     for(unsigned i=0;i<=dim;++i)
         conv+=abs(theta[i]-theta_aux[i]);
@@ -75,7 +75,7 @@ Regression::convergence()const{
 }
 
 double
-Regression::evaluate(const vector<double>& x)const{
+LinearReg::evaluate(const vector<double>& x)const{
     double y=theta[0];
     for(unsigned i=1;i<=dim;++i)
         y+=theta[i]*x[i];
@@ -83,7 +83,7 @@ Regression::evaluate(const vector<double>& x)const{
 }
 
 void
-Regression::gradient_descent(const Trainning_Set& train_set){
+LinearReg::gradient_descent(const Trainning_Set& train_set){
     double* temp=new double[dim+1];
     double alphaDivNum= alpha/train_set.size();
     unsigned i,k;
@@ -137,7 +137,7 @@ Regression::gradient_descent(const Trainning_Set& train_set){
 }
 
 
-void Regression::printMatrix(const ublas::matrix<double>& matrix)const {
+void LinearReg::printMatrix(const ublas::matrix<double>& matrix)const {
     cout << "-----Matrix-----" << endl;
     for (unsigned int i=0; i < matrix.size1(); i++) {
         cout << "{";
@@ -153,7 +153,7 @@ void Regression::printMatrix(const ublas::matrix<double>& matrix)const {
 }
 
 void
-Regression::normal_equation(const Trainning_Set& train_set){
+LinearReg::normal_equation(const Trainning_Set& train_set){
 	ublas::matrix<double> X (train_set.size(),train_set.get_dim()+1);
 	ublas::matrix<double> X_t (train_set.get_dim()+1,train_set.size());
 	ublas::vector<double> y (train_set.size());
@@ -204,7 +204,7 @@ Regression::normal_equation(const Trainning_Set& train_set){
 }
 
 bool
-Regression::inverse(const ublas::matrix<double>& mat,
+LinearReg::inverse(const ublas::matrix<double>& mat,
                     ublas::matrix<double>& inverse)const{
     using namespace ublas;
 

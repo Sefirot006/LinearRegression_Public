@@ -16,15 +16,15 @@
 using namespace std;
 namespace ublas = boost::numeric::ublas;
 
-class Regression{
+class LinearReg{
   // Output operator
-  friend ostream& operator<<(ostream&,const Regression&);
+  friend ostream& operator<<(ostream&,const LinearReg&);
 
 public:
-  Regression(int,double); // Constructor with dimensions and alpha
-  Regression(const Regression&); // Copy Constructor
-  ~Regression(); // Destructor
-  Regression& operator=(const Regression&); // Assingment operator
+  LinearReg(int,double); // Constructor with dimensions and alpha
+  LinearReg(const LinearReg&); // Copy Constructor
+  ~LinearReg(); // Destructor
+  LinearReg& operator=(const LinearReg&); // Assingment operator
 
   // Getters and setters
   inline unsigned get_dim() const;
@@ -35,8 +35,8 @@ public:
   void gradient_descent(const Trainning_Set&); // Gradient descent learning function
   void normal_equation(const Trainning_Set&);  // Normal equation method
 private:
-  Regression(); // Void Constructor
-  void Copy(const Regression&);
+  LinearReg(); // Void Constructor
+  void Copy(const LinearReg&);
   double convergence() const;
   void printMatrix(const ublas::matrix<double>&) const;
   bool inverse(const ublas::matrix<double>& mat,
@@ -56,12 +56,12 @@ private:
 //////////////////
 
 inline unsigned
-Regression::get_dim()const { return dim; }
+LinearReg::get_dim()const { return dim; }
 
 inline double
-Regression::get_alpha()const { return alpha; }
+LinearReg::get_alpha()const { return alpha; }
 
 inline void
-Regression::set_alpha(double a) { alpha=a; }
+LinearReg::set_alpha(double a) { alpha=a; }
 
 #endif

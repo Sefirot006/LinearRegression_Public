@@ -8,7 +8,7 @@ using namespace std;
 
 int
 main(int argc,char** argv){
-	Regression reg(1,0.00000001);
+	LinearReg reg(1,0.00000001);
 	cout << reg;
 
 	Trainning_Set train(argv[1],1);
