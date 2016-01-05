@@ -114,16 +114,16 @@ LinearReg::gradient_descent(const Trainning_Set& train_set){
             theta[i] -= alphaDivNum*temp[i];
             //if(k%10==0){
                 if(i==0)
-                    file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "+";
-                    //file << theta[i] << "+";
+                    //file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "+";
+                    file << theta[i] << "+";
                 else if(i==dim)
                     //file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "*x, ";
-                    file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "*x, ";
-                    //file << theta[i] << "*x, ";
+                    //file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "*x, ";
+                    file << theta[i] << "*x, ";
                 else
                     //file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "*x+";
-                    file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "*x+";
-                    //file << theta[i] << "*x+";
+                    //file << (theta[i]*trainAux.norm[i].second)+trainAux.norm[i].first << "*x+";
+                    file << theta[i] << "*x+";
             //}
         }
         //if(k%100==0)
