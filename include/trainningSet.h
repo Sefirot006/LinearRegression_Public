@@ -11,8 +11,8 @@ using namespace std;
 class Trainning_Set{
   friend ostream& operator<<(ostream&,const Trainning_Set&);
 public:
-  inline Trainning_Set();             // Void constructor
-  Trainning_Set(const char*,int);     // Constructor with the name of a file to read
+  inline Trainning_Set();         // Void constructor
+  Trainning_Set(const char*);     // Constructor with the name of a file to read
   inline ~Trainning_Set();
   Trainning_Set(const Trainning_Set&);// Copy constructor
   Trainning_Set& operator=(const Trainning_Set&); // Assignment operator

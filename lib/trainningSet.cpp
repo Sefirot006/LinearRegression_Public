@@ -10,24 +10,22 @@ operator<<(ostream& s,const Trainning_Set& t){
     return s;
 }
 
-//TODO ajustar parametro dimensiones automatico
-Trainning_Set::Trainning_Set(const char* filename,int dimensions): set(){
-    if(dimensions<1){
-        cerr << "Error: cannot create Trainning Set of <1 dimensions" << endl;
-        return;
-    }else
-        dim=dimensions;
-
+Trainning_Set::Trainning_Set(const char* filename): set(){
     ifstream file;
     file.open(filename);
+
     if(file){
         string read;
+
         while(!file.eof()){
             getline(file,read);
             if(!read.empty())
                 insert(read);
         }
+
         file.close();
+        // Get dimensions
+        dim = set[0].first.size()-1;
     }else
         cerr << "Error al abrir el archivo "<< filename << endl;
 }
