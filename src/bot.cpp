@@ -52,6 +52,12 @@ main(void){
 	//LinearReg reg(train.get_dim(),0.00000001);
 	//train.normalize();
 	//reg.normal_equation(train);
+	const int dim= {
+	    #include "dim.csv"
+	};
+    const double theta[6] = {
+        #include "export.csv"
+    };
 
     std::string s = "", subs;
 
