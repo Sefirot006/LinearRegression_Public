@@ -8,7 +8,7 @@
 #include <vector>
 #include <trainningSet.h>
 
-//#define BOOST_UBLAS_NDEBUG 1
+#define BOOST_UBLAS_NDEBUG 1
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/lu.hpp>
 #include <boost/numeric/ublas/io.hpp>
@@ -30,6 +30,7 @@ public:
   inline unsigned get_dim() const;
   inline double get_alpha() const;
   inline void set_alpha(double a);
+  void export_theta() const;
 
   double evaluate(const vector<double>&) const; // Recieves a vector of n dimension and returns the output of h(x)
   void gradient_descent(const Trainning_Set&); // Gradient descent learning function

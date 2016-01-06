@@ -66,6 +66,28 @@ LinearReg::Copy(const LinearReg& reg){
         theta[i]=reg.theta[i];
 }
 
+void
+LinearReg::export_theta() const{
+    ofstream file;
+    file.open("src/export.csv");
+    if(!file){
+        cerr << "Error exporting theta: can't open file src/export.csv"<<endl;
+        return;
+    }
+
+    for(unsigned i=0;i<=dim;++i)
+        file << theta[i] << ",";
+    file.close();
+
+    file.open("src/dim.csv");
+    if(!file){
+        cerr << "Error exporting dim: can't open file src/export.csv"<< endl;
+        return;
+    }
+    file << dim;
+    file.close();
+}
+
 double
 LinearReg::convergence()const{
     double conv=0.0;
