@@ -10,8 +10,11 @@ OBJ = $(patsubst %,$(LIBDIR)/%,$(_OBJ))
 
 all: main
 
-main:    src/main.cpp $(OBJ)
+main: src/main.cpp $(OBJ)
 	$(CC) $(OPTIONS) $(DEBUG) -I$(INCLUDEDIR) src/main.cpp $(OBJ) -o main
+
+bot: src/bot.cpp $(OBJ)
+	$(CC) $(OPTIONS) $(DEBUG) -I$(INCLUDEDIR) src/bot.cpp $(OBJ) -o bot
 
 $(LIBDIR)/%.o : $(LIBDIR)/%.cpp $(INCLUDEDIR)/%.h
 	$(CC) $(OPTIONS) $(DEBUG) -c -I$(INCLUDEDIR) -o $@ $<
