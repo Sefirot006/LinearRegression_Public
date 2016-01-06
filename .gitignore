@@ -1,6 +1,6 @@
 main
 bot
-exit.csv
+entrena
 
 # Compiled Object files
 *.slo
@@ -37,3 +37,7 @@ exit.csv
 # Others (Misc)
 *.png
 .~lock.*
+
+# Temp csv's
+src/*.csv
+exit.csv
