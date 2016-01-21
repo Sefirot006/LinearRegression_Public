@@ -140,7 +140,7 @@ LogRegression::gradientDescent(double *temp, double alphaDivNum, std::ofstream& 
     // Copy last values of theta for convergence
 		theta_aux[i]=theta[i];
 		theta[i] -= alphaDivNum*temp[i];
-		cout << "theta[" << i << "]: " << theta[i] << endl;
+		//cout << "theta[" << i << "]: " << theta[i] << endl;
 		if(k%10==0){
 			if(i==0)
 				file << theta[i] << "+";
