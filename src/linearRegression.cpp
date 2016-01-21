@@ -1,7 +1,9 @@
 #include "linearRegression.h"
 
+namespace Algorithm{
+
 ostream&
-operator<<(ostream& s,const LinearReg& reg){
+operator<<(ostream& s,const Algorithm::LinearReg& reg){
     s << "Linear Regression: " << endl
         << "Number of Dimensions: " << reg.dim << endl
         << "Alpha: " << reg.alpha << endl;
@@ -225,4 +227,6 @@ LinearReg::inverse(const ublas::matrix<double>& mat,
  	lu_substitute(A, pm, inverse);
 
 	return true;
+}
+
 }

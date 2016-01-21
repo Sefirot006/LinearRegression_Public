@@ -1,7 +1,9 @@
 #include "trainningSet.h"
 
+namespace Algorithm{
+
 ostream&
-operator<<(ostream& s,const Trainning_Set& t){
+operator<<(ostream& s,const Algorithm::Trainning_Set& t){
     for(unsigned i=0;i<t.set.size();++i){
         for(unsigned j=1;j<t.set[i].first.size();++j)
             s << t.set[i].first[j] << ",";
@@ -113,4 +115,6 @@ Trainning_Set::normalize_y(){
     for(unsigned i=0;i<set.size();++i){
         set[i].second=(set[i].second-avg)/range;
     }
+}
+
 }

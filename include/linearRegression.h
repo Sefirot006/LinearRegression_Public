@@ -16,6 +16,8 @@
 using namespace std;
 namespace ublas = boost::numeric::ublas;
 
+namespace Algorithm{
+
 class LinearReg{
   // Output operator
   friend ostream& operator<<(ostream&,const LinearReg&);
@@ -63,5 +65,7 @@ LinearReg::get_alpha()const { return alpha; }
 
 inline void
 LinearReg::set_alpha(double a) { alpha=a; }
+
+}
 
 #endif

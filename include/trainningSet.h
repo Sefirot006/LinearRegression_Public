@@ -8,6 +8,8 @@
 
 using namespace std;
 
+namespace Algorithm{
+
 class Trainning_Set{
   friend ostream& operator<<(ostream&,const Trainning_Set&);
 public:
@@ -58,5 +60,7 @@ Trainning_Set::size() const { return set.size(); }
 inline bool
 Trainning_Set::bound_check(int pos,int tam) const
 { return pos>=0 && pos<=tam; }
+
+}
 
 #endif
