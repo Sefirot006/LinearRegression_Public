@@ -1,0 +1,12 @@
+set title "Perceptrón 3D"
+set term png size 600, 400
+set output "figure.png"
+set datafile separator ","
+
+#set xr [-8:8]
+#set yr [-6650:6566]
+
+#set view 180,0
+set key off
+splot 'data/dataP2D.csv' using 1:2:3 with points palette pointsize 3 pointtype 7, \
+939*x+872*y-14

@@ -1,0 +1,10 @@
+set title "Perceptrón"
+set term png size 1024, 768
+set output "figure.png"
+set datafile separator ","
+#set yr [-6650:6566]
+set yr [-100:100]
+
+set palette model RGB defined ( 0 'red', 1 'green' )
+plot 'data/dataP.csv' u 1:2:3 with points palette pointsize 2 pointtype 3, \
+114.4*x-4 with lines
