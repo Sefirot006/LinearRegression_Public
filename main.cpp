@@ -1,6 +1,7 @@
 #include "perceptron.h"
 #include "logRegression.h"
 #include "neuralNetwork.h"
+#include "linearRegression.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -59,20 +60,15 @@ main(int argc,char** argv){
 	//Para las redes neuronales
 	//dim,capas,unidades,tamSalida,lambda
 
-	 Algorithm::Trainning_Set train(argv[1]);
-	 Algorithm::NeuralNetwork neuralNetwork(2,1,2,1,0,train.size());
-	//
-     double alpha = 0.001;
-	//
-	 neuralNetwork.gradientDescent(alpha,train);
-	//
-	//
-     cout << "1:" << neuralNetwork.forwardPropagation(train,0) << endl;
-     cout << "0:" << neuralNetwork.forwardPropagation(train,1) << endl;
-     cout << "0:" << neuralNetwork.forwardPropagation(train,2) << endl;
-     cout << "1:" << neuralNetwork.forwardPropagation(train,3) << endl;
+	Algorithm::Trainning_Set train(argv[1]);
+	train.NLT_product(1,1);
+	//cout << train <<endl;
 	//train.normalize();
 
+	cout << train << endl;
+    Algorithm::LinearReg reg(train.get_dim(),0.1);
+    reg.normal_equation(train);
+    cout << reg <<endl;
 	/*cout << train << endl;
 	cout << "train_set.get_x(elem).size(): " << train.get_x(0).size() << endl;
 	cout << "elemento1: " << train.get_x(0,0) << endl;

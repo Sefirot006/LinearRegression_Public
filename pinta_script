@@ -11,7 +11,7 @@ echo "set output \"figure.png\"" >> script_temp
 echo "set datafile separator \",\"" >> script_temp
 #echo "set xr [0:$2]" >> script_temp
 #echo "set yr [0:$2]" >> script_temp
-printf "plot 'train_set_points' with points, \\" >> script_temp
+printf "plot '$1' with points, \\" >> script_temp
 echo "" >> script_temp
 cat exit.csv >> script_temp
 echo "0*x with lines" >> script_temp

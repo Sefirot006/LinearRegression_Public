@@ -188,7 +188,7 @@ LinearReg::normal_equation(const Trainning_Set& train_set){
         if(i==0)
             file << theta[i] << "+";
         else if(i==dim)
-            file << theta[i] << "*x, ";
+            file << theta[i] << "*x**2, ";
         else
             file << theta[i] << "*x+";
     }
