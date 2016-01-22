@@ -78,6 +78,33 @@ Trainning_Set::normalize(){
     normalize_y();
 }
 
+void
+Trainning_Set::NLT_pow(unsigned x,unsigned exp){
+    if(!bound_check(0,x)){
+        cerr << "Error: this feature " << x << " doesn't exist" << endl;
+        return;
+    }
+
+    //TODO problema: subir o no dim?
+    // o hacer otra veriable con num feat y otra dim
+    for(unsigned i=0;i<set.size();++i)
+        set[i].first.push_back( pow(set[i].first[x],exp) );
+    ++dim;
+}
+
+void
+Trainning_Set::NLT_product(unsigned x1,unsigned x2){
+    if(!bound_check(0,x1) || !bound_check(0,x2)){
+        cerr <<"Error: this feature "<< x1 <<" or "<< x2 <<" doesn't exist"<< endl;
+        return;
+    }
+
+    //TODO problema: subir o no dim?
+    // o hacer otra veriable con num feat y otra dim
+    for(unsigned i=0;i<set.size();++i)
+        set[i].first.push_back( set[i].first[x1] * set[i].first[x2] );
+    ++dim;
+}
 
 void
 Trainning_Set::normalize_x(int x){

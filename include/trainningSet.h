@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
@@ -26,6 +27,8 @@ public:
   const vector<double>& get_x(int) const; // get vector of x's of a trainngin example
 
   void normalize();                   // Normalize features
+  void NLT_pow(unsigned x,unsigned exp);          // Non linear transform, select one feature and pow it
+  void NLT_product(unsigned x1,unsigned x2);      // Non linear transform, producto of two features
 private:
   void normalize_y();                 // Normalize y
   void normalize_x(int);              // Normalize vector x features
