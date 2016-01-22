@@ -1,0 +1,24 @@
+// Configuration Options
+{
+    // Simulation options
+    "Simulation" : {
+        // Lets players buy/sell concrete stock ("STOCK") quantities or only go allin ("ALLIN")
+        "InvestmentMode"    : "ALLIN",
+            
+        // Gives players information about new candles ("CANDLE") or new individual prices ("PRICE")
+        // The datafile passed to the simulator should be formatted accordingly to this value
+        "InformationMode"   : "CANDLE",
+
+        // Simulation time, in seconds, that will pass on every second of simulation
+        "TimeScale"         : 86400,
+
+        // Time in simulation seconds that will represent each Candle of the graph
+        "CandleDuration"    : 604800,
+
+        // Delay in seconds to wait for players to register, before starting the simulation
+        "StartDelay"        : 2,
+
+        // Initial amount of fiat to give to all players
+        "InitialFiat"       : 1000.0
+    }
+}
