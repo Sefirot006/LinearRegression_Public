@@ -15,6 +15,12 @@ all: main
 main:    main.cpp $(OBJ)
 	$(CC) $(OPTIONS) $(DEBUG) -I$(INCLUDEDIR) main.cpp $(OBJ) -o main # -L$(LIBDIR) $(LIBS)
 
+bot: src/bot.cpp $(OBJ)
+	$(CC) $(OPTIONS) $(DEBUG) -I$(INCLUDEDIR) src/bot.cpp $(OBJ) -o bot
+
+entrena: src/entrena.cpp $(OBJ)
+	$(CC) $(OPTIONS) $(DEBUG) -I$(INCLUDEDIR) src/entrena.cpp $(OBJ) -o entrena
+
 $(LIBDIR)%.o : $(SRCDIR)%.cpp $(INCLUDEDIR)%.h
 	$(CC) $(OPTIONS) $(DEBUG) -c -I$(INCLUDEDIR) -o $@ $<
 
