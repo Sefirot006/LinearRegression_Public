@@ -63,11 +63,12 @@ main(int argc,char** argv){
 	Algorithm::Trainning_Set train(argv[1]);
 	train.NLT_product(1,1);
 	//cout << train <<endl;
-	//train.normalize();
+	train.normalize();
 
 	cout << train << endl;
     Algorithm::LinearReg reg(train.get_dim(),0.1);
-    reg.normal_equation(train);
+    //reg.normal_equation(train);
+    reg.normal_eq_regularized(train);
     cout << reg <<endl;
 	/*cout << train << endl;
 	cout << "train_set.get_x(elem).size(): " << train.get_x(0).size() << endl;

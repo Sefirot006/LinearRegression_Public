@@ -36,6 +36,7 @@ public:
   double evaluate(const vector<double>&) const; // Recieves a vector of n dimension and returns the output of h(x)
   void gradient_descent(const Trainning_Set&); // Gradient descent learning function
   void normal_equation(const Trainning_Set&);  // Normal equation method
+  void normal_eq_regularized(const Trainning_Set&);  // Normal equation method regularized
 private:
   LinearReg(); // Void Constructor
   void Copy(const LinearReg&);
@@ -49,6 +50,8 @@ private:
   unsigned dim; // Number of dimensions
   double alpha; // Trainning rate
   static const int maxIter = 30000;
+  // lamda_constant
+  static constexpr double lambda = 3000;
   //static constexpr double minConv = 0.0001;
   static constexpr double minConv = 0.0000000001;
 };

@@ -176,9 +176,9 @@ LinearReg::normal_equation(const Trainning_Set& train_set){
 	inverse(X,A);
 
     // A = A · X^t
-    A=prod(A,X_t);
+    A=ublas::prod(A,X_t);
 	// y = A · y
-    y=prod(A,y);
+    y=ublas::prod(A,y);
 
     // Copy values to theta
     ofstream file;
@@ -203,6 +203,72 @@ LinearReg::normal_equation(const Trainning_Set& train_set){
 	aux3*=8;
 	printMatrix(aux3);
 	*/
+}
+
+void
+LinearReg::normal_eq_regularized(const Trainning_Set& train_set){
+    ublas::matrix<double> X (train_set.size(),train_set.get_dim()+1);
+    ublas::matrix<double> X_t (train_set.get_dim()+1,train_set.size());
+    ublas::vector<double> y (train_set.size());
+
+    // Obtaining X and transpose of X
+    for(unsigned i=0; i < train_set.size(); ++i){
+        for(unsigned j=0; j <= train_set.get_dim(); ++j){
+            X(i,j) = train_set.get_x(i,j);
+            X_t(j,i) = train_set.get_x(i,j);
+        }
+        y(i) = train_set.get_y(i);
+    }
+    // X = X · X^t
+    X=ublas::prod(X_t,X);
+
+    // A = X^-1
+    ublas::matrix<double> A(X.size1(),X.size2());
+
+    // lambda_matrix
+    ublas::matrix<double> lambda_matrix(X.size1(),X.size1());
+    ublas::zero_matrix<double> zeroMatrix(X.size1(),X.size1());
+
+    lambda_matrix = zeroMatrix;
+
+    // Initialize lambda_matrix
+    for(unsigned i=1; i <X.size1(); ++i)
+        lambda_matrix(i,i) = lambda;
+
+    //printMatrix(lambda_matrix);
+
+    // Add the regularization expression before the inverse operation
+    X += lambda_matrix;
+    inverse(X,A);   
+
+    // A = A · X^t
+    A=ublas::prod(A,X_t);
+    // y = A · y
+    y=ublas::prod(A,y);
+
+    // Copy values to theta
+    ofstream file;
+    file.open("exit.csv");
+    for(unsigned i=0;i<=dim;++i){
+        theta[i]=y[i];
+        if(i==0)
+            file << theta[i] << "+";
+        else if(i==dim)
+            file << theta[i] << "*x**2, ";
+        else
+            file << theta[i] << "*x+";
+    }
+    /* Prueba funcion inverse
+    ublas::matrix<double> aux2(4,4),aux3(4,4);
+    aux2(0,0)=-1; aux2(0,1)=3; aux2(0,2)=1; aux2(0,3)=-1;
+    aux2(1,0)=-4; aux2(1,1)=-10; aux2(1,2)=0; aux2(1,3)=4;
+    aux2(2,0)=0; aux2(2,1)=7; aux2(2,2)=-2; aux2(2,3)=-4;
+    aux2(3,0)=-7; aux2(3,1)=-14; aux2(3,2)=1; aux2(3,3)=5;
+    printMatrix(aux2);
+    inverse(aux2,aux3);
+    aux3*=8;
+    printMatrix(aux3);
+    */
 }
 
 bool
