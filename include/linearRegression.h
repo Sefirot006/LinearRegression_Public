@@ -23,37 +23,30 @@ class LinearReg{
   friend ostream& operator<<(ostream&,const LinearReg&);
 
 public:
-  LinearReg(int,double); // Constructor with dimensions and alpha
+  LinearReg(int,double); // Constructor with dimensions and lambda
   LinearReg(const LinearReg&); // Copy Constructor
   ~LinearReg(); // Destructor
   LinearReg& operator=(const LinearReg&); // Assingment operator
 
   // Getters and setters
   inline unsigned get_dim() const;
-  inline double get_alpha() const;
-  inline void set_alpha(double a);
+  inline double get_lambda() const;
+  inline void set_lambda(double a);
 
   double evaluate(const vector<double>&) const; // Recieves a vector of n dimension and returns the output of h(x)
-  void gradient_descent(const Trainning_Set&); // Gradient descent learning function
-  void normal_equation(const Trainning_Set&);  // Normal equation method
-  void normal_eq_regularized(const Trainning_Set&);  // Normal equation method regularized
+  void normal_equation(const Trainning_Set&,bool);  // Normal equation method regularized
 private:
   LinearReg(); // Void Constructor
   void Copy(const LinearReg&);
-  double convergence() const;
   void printMatrix(const ublas::matrix<double>&) const;
   bool inverse(const ublas::matrix<double>& mat,
                 ublas::matrix<double>& inverse)const; // Calculate the inverse matrix with LU factorization
 
   double* theta; // Vector theta parameters of hypotesis
-  double* theta_aux; // Auxiliar to calculate convergence
   unsigned dim; // Number of dimensions
-  double alpha; // Trainning rate
   static const int maxIter = 30000;
   // lamda_constant
-  static constexpr double lambda = 3000;
-  //static constexpr double minConv = 0.0001;
-  static constexpr double minConv = 0.0000000001;
+  double lambda;
 };
 
 //////////////////
@@ -64,10 +57,10 @@ inline unsigned
 LinearReg::get_dim()const { return dim; }
 
 inline double
-LinearReg::get_alpha()const { return alpha; }
+LinearReg::get_lambda()const { return lambda; }
 
 inline void
-LinearReg::set_alpha(double a) { alpha=a; }
+LinearReg::set_lambda(double a) { lambda=a; }
 
 }
 
