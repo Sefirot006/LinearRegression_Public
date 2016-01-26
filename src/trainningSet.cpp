@@ -28,6 +28,7 @@ Trainning_Set::Trainning_Set(const char* filename): set(){
         file.close();
         // Get dimensions
         dim = set[0].first.size()-1;
+        resize();
     }else
         cerr << "Error al abrir el archivo "<< filename << endl;
 }
@@ -72,24 +73,16 @@ Trainning_Set::get_x(int ex) const{
 }
 
 void
-Trainning_Set::normalize(){
-    for(unsigned i=1;i<=dim;++i)
-        normalize_x(i);
-    normalize_y();
-}
-
-void
 Trainning_Set::NLT_pow(unsigned x,unsigned exp){
     if(!bound_check(0,x)){
         cerr << "Error: this feature " << x << " doesn't exist" << endl;
         return;
     }
 
-    //TODO problema: subir o no dim?
-    // o hacer otra veriable con num feat y otra dim
     for(unsigned i=0;i<set.size();++i)
         set[i].first.push_back( pow(set[i].first[x],exp) );
-    ++dim;
+    dim++;
+    resize();
 }
 
 void
@@ -99,49 +92,44 @@ Trainning_Set::NLT_product(unsigned x1,unsigned x2){
         return;
     }
 
-    //TODO problema: subir o no dim?
-    // o hacer otra veriable con num feat y otra dim
     for(unsigned i=0;i<set.size();++i)
         set[i].first.push_back( set[i].first[x1] * set[i].first[x2] );
-    ++dim;
+    dim++;
+    resize();
+}
+
+void
+Trainning_Set::resize(){
+    avg.resize(dim+1);
+    range.resize(dim+1);
+}
+
+void
+Trainning_Set::normalize(){
+    for(unsigned i=1;i<=dim;++i){
+        stats(i);
+        normalize_x(i);
+    }
 }
 
 void
 Trainning_Set::normalize_x(int x){
-    double max,min,avg,range;
-    max=min=avg=0.0;
+    for(unsigned i=0;i<set.size();++i)
+        set[i].first[x]=(set[i].first[x]-avg[x])/range[x];
+}
+
+void Trainning_Set::stats(unsigned x){
+    double max,min;
+    max=min=avg[x]=0.0;
     for(unsigned i=0;i<set.size();++i){
         if(max<set[i].first[x])
             max=set[i].first[x];
         if(min>set[i].first[x])
             min=set[i].first[x];
-        avg+=set[i].first[x];
+        avg[x]+=set[i].first[x];
     }
-    avg=avg/set.size();
-    range=max-min;
-
-    for(unsigned i=0;i<set.size();++i){
-        set[i].first[x]=(set[i].first[x]-avg)/range;
-    }
-}
-
-void
-Trainning_Set::normalize_y(){
-    double max,min,avg,range;
-    max=min=avg=0.0;
-    for(unsigned i=0;i<set.size();++i){
-        if(max<set[i].second)
-            max=set[i].second;
-        if(min>set[i].second)
-            min=set[i].second;
-        avg+=set[i].second;
-    }
-    avg=avg/set.size();
-    range=max-min;
-
-    for(unsigned i=0;i<set.size();++i){
-        set[i].second=(set[i].second-avg)/range;
-    }
+    avg[x]=avg[x]/set.size();
+    range[x]=max-min;
 }
 
 }

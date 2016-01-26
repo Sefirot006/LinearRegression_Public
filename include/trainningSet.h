@@ -29,11 +29,15 @@ public:
   void normalize();                   // Normalize features
   void NLT_pow(unsigned x,unsigned exp);          // Non linear transform, select one feature and pow it
   void NLT_product(unsigned x1,unsigned x2);      // Non linear transform, producto of two features
+
+  vector<double> avg;       // Average of all features from x_1 to x_n and Y
+  vector<double> range;     // Range of all features from x_1 to x_n and Y
 private:
-  void normalize_y();                 // Normalize y
   void normalize_x(int);              // Normalize vector x features
   inline bool bound_check(int,int) const;
   void insert(const string&);
+  void resize();                      // Resize avg and range to a new dim
+  void stats(unsigned x);             // Calculate range and average of features
 
   vector<pair<vector<double>, double> > set;  // Trainning set
   int dim; // Dimensions
@@ -44,11 +48,12 @@ private:
 //////////////////
 
 inline
-Trainning_Set::Trainning_Set(): set(),dim(0)
+Trainning_Set::Trainning_Set(): set(),dim(0),avg(),range()
 { }
 
 inline
-Trainning_Set::Trainning_Set(const Trainning_Set& ts): set(ts.set),dim(ts.dim)
+Trainning_Set::Trainning_Set(const Trainning_Set& ts)
+    : set(ts.set),dim(ts.dim),avg(ts.avg),range(ts.range)
 { }
 
 inline
